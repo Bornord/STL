@@ -103,7 +103,12 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public boolean collectAndBackwardResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics collect is undefined in VariableDeclaration.");
+		boolean ok=false;
+			if (!_scope.contains(this.name)) {
+				ok = true;
+				_scope.register(this);
+			}
+		return ok;
 	}
 
 	/* (non-Javadoc)
