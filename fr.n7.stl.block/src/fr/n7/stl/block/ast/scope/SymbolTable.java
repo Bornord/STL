@@ -63,6 +63,7 @@ public class SymbolTable implements HierarchicalScope<Declaration> {
 	 */
 	@Override
 	public void register(Declaration _declaration) {
+		//System.out.println("Testons");
 		if (this.accepts(_declaration)) {
 			this.declarations.put(_declaration.getName(), _declaration);
 		} else {

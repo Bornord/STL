@@ -62,7 +62,7 @@ public class Block {
 		SymbolTable local = new SymbolTable(_scope);
 		for (Instruction instruction : instructions) {
 			ok = ok && instruction.collectAndBackwardResolve(local);
-			if(!ok) break;
+			if (!ok) break;
 		}
 		return ok;
 	}
@@ -77,6 +77,7 @@ public class Block {
 	public boolean resolve(HierarchicalScope<Declaration> _scope) {
 		boolean ok = true;
 		for (Instruction instruction : instructions) {
+			System.out.println("instruction");
 			ok = ok && instruction.fullResolve(_scope);
 			if(!ok) break;
 		}

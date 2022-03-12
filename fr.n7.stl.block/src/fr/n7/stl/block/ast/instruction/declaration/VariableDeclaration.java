@@ -86,28 +86,34 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 * Synthesized semantics attribute for the register used to compute the address of the variable.
 	 * @return Register used to compute the address where the declared variable will be stored.
 	 */
+
 	public Register getRegister() {
 		return this.register;
 	}
-	
+
 	/**
 	 * Synthesized semantics attribute for the offset used to compute the address of the variable.
 	 * @return Offset used to compute the address where the declared variable will be stored.
 	 */
+
 	public int getOffset() {
 		return this.offset;
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.instruction.Instruction#collect(fr.n7.stl.block.ast.scope.Scope)
 	 */
+
 	@Override
 	public boolean collectAndBackwardResolve(HierarchicalScope<Declaration> _scope) {
-		boolean ok=false;
-			if (!_scope.contains(this.name)) {
-				ok = true;
-				_scope.register(this);
-			}
+		boolean ok = false;
+		if (!_scope.contains(this.name)) {
+			ok = true;
+			_scope.register(this);
+			System.out.println(_scope.toString()+"Table = "+this.name);
+		} else {
+			ok = false;
+		}
 		return ok;
 	}
 
@@ -116,7 +122,8 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public boolean fullResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics resolve is undefined in VariableDeclaration.");
+		System.out.println("Assignation de nom " + this.name + "à la valeur" + this.value);
+		return this.value.fullResolve(_scope);
 	}
 
 	/* (non-Javadoc)
