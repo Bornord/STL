@@ -78,6 +78,7 @@ public class Block {
 	 */
 	public boolean resolve(HierarchicalScope<Declaration> _scope) {
 		boolean ok = true;
+		System.out.println("aperçu du scope: "+ local);
 		for (Instruction instruction : instructions) {
 			System.out.println("instruction");
 			ok = ok && instruction.fullResolve(this.local);

@@ -50,7 +50,17 @@ public class Conditional implements Instruction {
 	 */
 	@Override
 	public boolean collectAndBackwardResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics collect is undefined in Conditional.");
+		if (this.condition.collectAndBackwardResolve(_scope)) {
+			if (this.thenBranch==null && this.elseBranch != null){
+				return this.elseBranch.collect(_scope);
+			} else if (this.elseBranch == null && this.thenBranch !=null) {
+				return this.thenBranch.collect(_scope);
+			} else {
+				return true;
+			}
+		} else {
+			return false;
+		}
 	}
 	
 	/* (non-Javadoc)
@@ -58,8 +68,14 @@ public class Conditional implements Instruction {
 	 */
 	@Override
 	public boolean fullResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics resolve is undefined in Conditional.");
-	}
+			if (this.thenBranch==null && this.elseBranch != null){
+				return this.elseBranch.resolve(_scope);
+			} else if (this.elseBranch == null && this.thenBranch !=null) {
+				return this.thenBranch.resolve(_scope);
+			} else {
+				return true;
+			}
+		}
 
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.Instruction#checkType()

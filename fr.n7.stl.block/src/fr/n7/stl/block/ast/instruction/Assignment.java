@@ -48,15 +48,19 @@ public class Assignment implements Instruction, Expression {
 	 */
 	@Override
 	public boolean collectAndBackwardResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics collect is undefined in Assignment.");
-	}
+		if (_scope.knows(this.assignable.toString().trim())){
+			return this.value.collectAndBackwardResolve(_scope);
+		} else {
+			return false;
+		}
+	}	
 
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.instruction.Instruction#resolve(fr.n7.stl.block.ast.scope.HierarchicalScope)
 	 */
 	@Override
 	public boolean fullResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics resolve is undefined in Assignment.");
+		return this.value.fullResolve(_scope);
 	}
 
 	/* (non-Javadoc)
