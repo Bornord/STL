@@ -25,6 +25,8 @@ import fr.n7.stl.tam.ast.TAMFactory;
  */
 public class Block {
 
+	protected HierarchicalScope<Declaration> local;
+
 	/**
 	 * Sequence of instructions contained in a block.
 	 */
@@ -59,7 +61,7 @@ public class Block {
 	 */
 	public boolean collect(HierarchicalScope<Declaration> _scope) {
 		boolean ok = true;
-		SymbolTable local = new SymbolTable(_scope);
+		this.local = new SymbolTable(_scope);
 		for (Instruction instruction : instructions) {
 			ok = ok && instruction.collectAndBackwardResolve(local);
 			if (!ok) break;
@@ -78,7 +80,7 @@ public class Block {
 		boolean ok = true;
 		for (Instruction instruction : instructions) {
 			System.out.println("instruction");
-			ok = ok && instruction.fullResolve(_scope);
+			ok = ok && instruction.fullResolve(this.local);
 			if(!ok) break;
 		}
 		return ok;
