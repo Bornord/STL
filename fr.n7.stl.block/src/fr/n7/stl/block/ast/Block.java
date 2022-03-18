@@ -62,6 +62,7 @@ public class Block {
 	public boolean collect(HierarchicalScope<Declaration> _scope) {
 		boolean ok = true;
 		this.local = new SymbolTable(_scope);
+		System.out.println("aperçu table des symbole"+_scope.toString());
 		for (Instruction instruction : instructions) {
 			ok = ok && instruction.collectAndBackwardResolve(local);
 			if (!ok) break;
@@ -92,7 +93,15 @@ public class Block {
 	 * @return Synthesized True if the instruction is well typed, False if not.
 	 */	
 	public boolean checkType() {
-		throw new SemanticsUndefinedException("Semantics checkType is undefined in Block.");
+		boolean ok = true;
+		for (Instruction instruction : instructions) {
+			ok = ok && instruction.checkType();
+			if (!ok) {
+				break;
+			} else {
+			};
+		} 
+		return ok:
 	}
 
 	/**

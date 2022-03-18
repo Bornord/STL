@@ -1,9 +1,4 @@
 test {
-	int i = 3;
-	if (i==3) {
-		int j= 6;
-	} else {
-		j= 3;
-		int k = 8;
-	}
+	int i= 3;
+	i = false;
 }

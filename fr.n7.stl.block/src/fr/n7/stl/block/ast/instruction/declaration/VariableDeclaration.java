@@ -109,8 +109,12 @@ public class VariableDeclaration implements Declaration, Instruction {
 		boolean ok = false;
 		if (!_scope.contains(this.name)) {
 			ok = true;
+			if (this.checkType()) {
 			_scope.register(this);
-			System.out.println(_scope.toString()+"Table = "+this.name);
+			//System.out.println(_scope.toString()+"Table = "+this.name);
+			} else {
+				ok = false;
+			}
 		} else {
 			ok = false;
 		}
@@ -122,8 +126,12 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public boolean fullResolve(HierarchicalScope<Declaration> _scope) {
-		System.out.println("Assignation de nom " + this.name + "à la valeur" + this.value);
-		return this.value.fullResolve(_scope);
+		// nécessaire pour les typedefs
+		if (this.checkType()) {
+			return this.value.fullResolve(_scope);
+		} else {
+			return false;
+		}
 	}
 
 	/* (non-Javadoc)
@@ -131,7 +139,7 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public boolean checkType() {
-		throw new SemanticsUndefinedException("Semantics checkType is undefined in VariableDeclaration.");
+		return this.type.compatibleWith(this.value.getType());
 	}
 
 	/* (non-Javadoc)

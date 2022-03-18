@@ -37,7 +37,7 @@ public class Return implements Instruction {
 	 */
 	@Override
 	public boolean collectAndBackwardResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics collect is undefined in Return.");
+		return this.value.collectAndBackwardResolve(_scope);
 	}
 	
 	/* (non-Javadoc)
@@ -45,7 +45,7 @@ public class Return implements Instruction {
 	 */
 	@Override
 	public boolean fullResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics resolve is undefined in Return.");
+		return this.value.fullResolve(_scope);
 	}
 
 	/* (non-Javadoc)

@@ -56,7 +56,7 @@ public class Conditional implements Instruction {
 			} else if (this.elseBranch == null && this.thenBranch !=null) {
 				return this.thenBranch.collect(_scope);
 			} else {
-				return true;
+				return (this.thenBranch.collect(_scope) && this.elseBranch.collect(_scope));
 			}
 		} else {
 			return false;
@@ -73,7 +73,7 @@ public class Conditional implements Instruction {
 			} else if (this.elseBranch == null && this.thenBranch !=null) {
 				return this.thenBranch.resolve(_scope);
 			} else {
-				return true;
+				return this.thenBranch.resolve(_scope) && this.elseBranch.resolve(_scope);
 			}
 		}
 

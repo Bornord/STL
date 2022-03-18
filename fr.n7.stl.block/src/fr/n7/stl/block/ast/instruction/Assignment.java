@@ -42,14 +42,18 @@ public class Assignment implements Instruction, Expression {
 	public String toString() {
 		return this.assignable + " = " + this.value.toString() + ";\n";
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.instruction.Instruction#collect(fr.n7.stl.block.ast.scope.HierarchicalScope)
 	 */
 	@Override
 	public boolean collectAndBackwardResolve(HierarchicalScope<Declaration> _scope) {
 		if (_scope.knows(this.assignable.toString().trim())){
+			if (this.checkType()) {
 			return this.value.collectAndBackwardResolve(_scope);
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
@@ -60,7 +64,11 @@ public class Assignment implements Instruction, Expression {
 	 */
 	@Override
 	public boolean fullResolve(HierarchicalScope<Declaration> _scope) {
-		return this.value.fullResolve(_scope);
+		if (this.checkType()){
+			return this.value.fullResolve(_scope);
+		} else {
+			return false;
+		}
 	}
 
 	/* (non-Javadoc)
@@ -68,7 +76,7 @@ public class Assignment implements Instruction, Expression {
 	 */
 	@Override
 	public Type getType() {
-		throw new SemanticsUndefinedException( "Semantics getType is undefined in Assignment.");
+		return this.value.getType();
 	}
 
 	/* (non-Javadoc)
@@ -76,7 +84,7 @@ public class Assignment implements Instruction, Expression {
 	 */
 	@Override
 	public boolean checkType() {
-		throw new SemanticsUndefinedException( "Semantics checkType is undefined in Assignment.");
+		return this.assignable.getType().compatibleWith(this.value.getType());
 	}
 	
 	/* (non-Javadoc)
