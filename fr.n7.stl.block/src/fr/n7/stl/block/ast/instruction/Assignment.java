@@ -49,11 +49,7 @@ public class Assignment implements Instruction, Expression {
 	@Override
 	public boolean collectAndBackwardResolve(HierarchicalScope<Declaration> _scope) {
 		if (_scope.knows(this.assignable.toString().trim())){
-			if (this.checkType()) {
 			return this.value.collectAndBackwardResolve(_scope);
-			} else {
-				return false;
-			}
 		} else {
 			return false;
 		}
@@ -64,11 +60,7 @@ public class Assignment implements Instruction, Expression {
 	 */
 	@Override
 	public boolean fullResolve(HierarchicalScope<Declaration> _scope) {
-		if (this.checkType()){
 			return this.value.fullResolve(_scope);
-		} else {
-			return false;
-		}
 	}
 
 	/* (non-Javadoc)

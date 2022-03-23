@@ -109,12 +109,8 @@ public class VariableDeclaration implements Declaration, Instruction {
 		boolean ok = false;
 		if (!_scope.contains(this.name)) {
 			ok = true;
-			if (this.checkType()) {
 			_scope.register(this);
 			//System.out.println(_scope.toString()+"Table = "+this.name);
-			} else {
-				ok = false;
-			}
 		} else {
 			ok = false;
 		}

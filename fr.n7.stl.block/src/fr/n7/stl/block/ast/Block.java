@@ -62,11 +62,11 @@ public class Block {
 	public boolean collect(HierarchicalScope<Declaration> _scope) {
 		boolean ok = true;
 		this.local = new SymbolTable(_scope);
-		System.out.println("aperçu table des symbole"+_scope.toString());
+		
 		for (Instruction instruction : instructions) {
 			ok = ok && instruction.collectAndBackwardResolve(local);
-			if (!ok) break;
 		}
+		System.out.println("aperçu table des symbole"+_scope.toString());
 		return ok;
 	}
 	
@@ -79,12 +79,12 @@ public class Block {
 	 */
 	public boolean resolve(HierarchicalScope<Declaration> _scope) {
 		boolean ok = true;
-		System.out.println("aperçu du scope: "+ local);
+		
 		for (Instruction instruction : instructions) {
 			System.out.println("instruction");
 			ok = ok && instruction.fullResolve(this.local);
-			if(!ok) break;
 		}
+		System.out.println("aperçu du scope: "+ local);
 		return ok;
 	}
 

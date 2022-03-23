@@ -753,6 +753,10 @@ class CUP$Parser$actions {
 					System.out.println("Collect succeeded : " + tds);
 					if (bloc.resolve(tds)) {
 						System.out.println("Resolve succeeded.");
+						// ajouté à la main
+						if (bloc.checkType()){
+							System.out.println("Type checked");
+						}
 					} else {
 						System.out.println("Resolve failed." + tds);
 					}
