@@ -1,0 +1,1 @@
+# où est-ce qu'on renseigne le type pour une déclaration de variable ?

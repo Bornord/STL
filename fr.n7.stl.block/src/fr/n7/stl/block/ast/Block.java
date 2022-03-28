@@ -81,10 +81,8 @@ public class Block {
 		boolean ok = true;
 		
 		for (Instruction instruction : instructions) {
-			System.out.println("instruction");
 			ok = ok && instruction.fullResolve(this.local);
 		}
-		System.out.println("aperçu du scope: "+ local);
 		return ok;
 	}
 
@@ -95,6 +93,7 @@ public class Block {
 	public boolean checkType() {
 		boolean ok = true;
 		for (Instruction instruction : instructions) {
+			System.out.println(instruction);
 			ok = ok && instruction.checkType();
 			if (!ok) {
 				break;

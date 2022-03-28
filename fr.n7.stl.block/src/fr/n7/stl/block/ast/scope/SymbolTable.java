@@ -13,7 +13,6 @@ import java.util.Map.Entry;
  *
  */
 public class SymbolTable implements HierarchicalScope<Declaration> {
-	
 	private Map<String, Declaration> declarations;
 	private Scope<Declaration> context;
 

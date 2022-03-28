@@ -123,11 +123,7 @@ public class VariableDeclaration implements Declaration, Instruction {
 	@Override
 	public boolean fullResolve(HierarchicalScope<Declaration> _scope) {
 		// nécessaire pour les typedefs
-		if (this.checkType()) {
 			return this.value.fullResolve(_scope);
-		} else {
-			return false;
-		}
 	}
 
 	/* (non-Javadoc)
