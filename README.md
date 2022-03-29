@@ -17,3 +17,10 @@ départ => input.txt : ajout "i=1; if ... then ... else ... "
 -> collect : création table des symboles
 -> resolve : exploitation de la table des symboles
 
+# Fonction de la table
+int f() {
+    return 1
+}
+
+1 doit être compatible ave int. la
+FunctionDeclaration -> Parcourir Block (returnTo : FunctionDeclaration) -> Parcourir Instruction (returnTo : FunctionDeclaration) -> Parcourir Return -> Retourne un truc. 
