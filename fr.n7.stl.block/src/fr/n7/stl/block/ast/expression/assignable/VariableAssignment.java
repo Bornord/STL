@@ -41,6 +41,8 @@ public class VariableAssignment extends AbstractIdentifier implements Assignable
 			if (_declaration instanceof VariableDeclaration) {
 				this.declaration = ((VariableDeclaration) _declaration);
 				return true;
+			} else if ((_declaration instanceof ConstantDeclaration)) {
+				return false;
 			} else {
 				Logger.error("The declaration for " + this.name + " is of the wrong kind.");
 				return false;

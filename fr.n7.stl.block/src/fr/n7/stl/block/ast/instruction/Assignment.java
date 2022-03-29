@@ -50,7 +50,7 @@ public class Assignment implements Instruction, Expression {
 	public boolean collectAndBackwardResolve(HierarchicalScope<Declaration> _scope) {
 		if (_scope.knows(this.assignable.toString().trim())){
 			if (this.value.collectAndBackwardResolve(_scope)) {
-				return ( !(this.assignable instanceof ConstantDeclaration) && this.assignable.collectAndBackwardResolve(_scope));
+				return (this.assignable.collectAndBackwardResolve(_scope));
 			} else {
 				return false;
 			}
