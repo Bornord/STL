@@ -757,6 +757,8 @@ class CUP$Parser$actions {
 						bloc.toString();
 						if (bloc.checkType()){
 							System.out.println("Type checked");
+						} else {
+							System.out.println("Type check failed");
 						}
 					} else {
 						System.out.println("Resolve failed." + tds);

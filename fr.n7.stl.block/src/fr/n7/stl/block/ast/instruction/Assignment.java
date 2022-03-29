@@ -49,7 +49,11 @@ public class Assignment implements Instruction, Expression {
 	@Override
 	public boolean collectAndBackwardResolve(HierarchicalScope<Declaration> _scope) {
 		if (_scope.knows(this.assignable.toString().trim())){
-			return this.value.collectAndBackwardResolve(_scope);
+			if (this.value.collectAndBackwardResolve(_scope)) {
+				return ( !(this.assignable instanceof ConstantDeclaration) && this.assignable.collectAndBackwardResolve(_scope));
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
@@ -76,10 +80,6 @@ public class Assignment implements Instruction, Expression {
 	 */
 	@Override
 	public boolean checkType() {
-		System.out.println("Assignable: ");
-		System.out.println(this.assignable);
-		System.out.println("Value: ");
-		System.out.println(this.value.getType());
 		return this.assignable.getType().compatibleWith(this.value.getType());
 	}
 	
