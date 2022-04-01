@@ -69,7 +69,12 @@ public class RecordType implements Type, Declaration, Scope<FieldDeclaration> {
 	 */
 	@Override
 	public boolean equalsTo(Type _other) {
-		throw new SemanticsUndefinedException( "compatibleWith is undefined in RecordType.");
+		Boolean ok = true;
+		// Avec for (i) check des tailles
+		for (FieldDeclaration element : this.fields) {
+			//ok = ok && element.equals(_other);
+		}
+		return ok;
 	}
 
 	/* (non-Javadoc)

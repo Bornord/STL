@@ -107,7 +107,7 @@ public class VariableDeclaration implements Declaration, Instruction {
 	@Override
 	public boolean collectAndBackwardResolve(HierarchicalScope<Declaration> _scope) {
 		boolean ok = false;
-		if (!_scope.contains(this.name)) {
+		if (!_scope.contains(this.name) && this.value.collectAndBackwardResolve(_scope)) {
 			ok = true;
 			_scope.register(this);
 			//System.out.println(_scope.toString()+"Table = "+this.name);
@@ -123,7 +123,7 @@ public class VariableDeclaration implements Declaration, Instruction {
 	@Override
 	public boolean fullResolve(HierarchicalScope<Declaration> _scope) {
 		// nécessaire pour les typedefs
-			return this.value.fullResolve(_scope);
+			return this.value.fullResolve(_scope) && this.type.resolve(_scope);
 	}
 
 	/* (non-Javadoc)

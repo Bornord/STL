@@ -1,8 +1,11 @@
-test {
-	int i = 3;
-	if (i==3) {
-		return 1;
-	} else {
-		return true;
-	}
+test2 {
+	typedef struct p{
+		int x1;
+		int x2;
+	} Point;
+
+	int a = 3;
+	int b = 5;
+	Point p = {a,b};
 }
+
