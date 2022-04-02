@@ -71,10 +71,13 @@ public class RecordType implements Type, Declaration, Scope<FieldDeclaration> {
 	public boolean equalsTo(Type _other) {
 		Boolean ok = true;
 		// Avec for (i) check des tailles
-		for (FieldDeclaration element : this.fields) {
-			//ok = ok && element.equals(_other);
+		if (_other instanceof RecordType) {
+			for (int i=0; i<_other.fields.size(); i++) {
+				ok = ok && this.fields.get(i).equals(_other.fields.get(i));
+			}
+		} else {
+			return false;
 		}
-		return ok;
 	}
 
 	/* (non-Javadoc)
