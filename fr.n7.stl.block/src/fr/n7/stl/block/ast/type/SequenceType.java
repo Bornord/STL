@@ -17,12 +17,13 @@ import fr.n7.stl.block.ast.scope.HierarchicalScope;
  */
 public class SequenceType implements Type {
 	
-	private List<Type> types;
+	// TO-DO : change to private avec getter / setter
+	public List<Type> types;
 
 	public SequenceType() {
 		this.types = new LinkedList<Type>();
 	}
-	
+
 	public void add(Type _type) {
 		this.types.add(_type);
 	}

@@ -1,26 +1,31 @@
 ### STL
+
 Projet de STL
 
-## Compiler : 
+## Compiler :
+
     ant
-## Exécuter le fichier input.txt : 
+
+## Exécuter le fichier input.txt :
+
 java -cp bin:tools/java-cup-11b-runtime.jar:tools/commons-lang3-3.7.jar:tools/commons-text-1.2.jar fr.n7.stl.block.Driver
 
-# TP1 : découverte => Expression Binaire & Unaire
-=> ajouter if sans else & le while à la grammaire
+## Comment lire :
 
-# TP2 : implémenter la gestion de la table des symboles
-=> définir collectAndPartielResolve & fullResolve
-départ => input.txt : ajout "i=1; if ... then ... else ... "
-=> variable Délcaration -> collect, resolve, conditional
-=> implanter le typages
--> collect : création table des symboles
--> resolve : exploitation de la table des symboles
+-   Les classes sont complétés dans fr.n7.stl.block/src/
+-   Un dossier fichierTest disponibles dans fr.n7.stl.block/fichierTest
+    -   Les tests sont découpés en 3 parties :
+        -   GenerationTest qui rescense les tests de génération de code
+        -   TDSTest qui rescense les tests sur la sémentique et la gestion de la TDS
+        -   TypageTest qui rescense les tests sur les types
 
-# Fonction de la table
+## Remarques
+
+### Fonction de la table
+
 int f() {
-    return 1
+return 1
 }
 
 1 doit être compatible ave int. la
-FunctionDeclaration -> Parcourir Block (returnTo : FunctionDeclaration) -> Parcourir Instruction (returnTo : FunctionDeclaration) -> Parcourir Return -> Retourne un truc. 
+FunctionDeclaration -> Parcourir Block (returnTo : FunctionDeclaration) -> Parcourir Instruction (returnTo : FunctionDeclaration) -> Parcourir Return -> Retourne un truc.

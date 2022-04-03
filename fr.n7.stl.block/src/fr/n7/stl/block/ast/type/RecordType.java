@@ -69,12 +69,10 @@ public class RecordType implements Type, Declaration, Scope<FieldDeclaration> {
 	 */
 	@Override
 	public boolean equalsTo(Type _other) {
-		Boolean ok = true;
-		// Avec for (i) check des tailles
-		if (_other instanceof RecordType) {
-			for (int i=0; i<_other.fields.size(); i++) {
-				ok = ok && this.fields.get(i).equals(_other.fields.get(i));
-			}
+		if (_other instanceof SequenceType) {
+			return _other.equalsTo(this);
+		} else if (_other instanceof NamedType) {
+			return _other.equalsTo(this);
 		} else {
 			return false;
 		}
@@ -85,7 +83,13 @@ public class RecordType implements Type, Declaration, Scope<FieldDeclaration> {
 	 */
 	@Override
 	public boolean compatibleWith(Type _other) {
-		throw new SemanticsUndefinedException( "compatibleWith is undefined in RecordType.");
+		if (_other instanceof SequenceType) {
+			return _other.compatibleWith(this);
+		} else if (_other instanceof NamedType) {
+			return _other.compatibleWith(this);
+		} else {
+			return false;
+		}	
 	}
 
 	/* (non-Javadoc)
@@ -147,7 +151,7 @@ public class RecordType implements Type, Declaration, Scope<FieldDeclaration> {
 			throw new IllegalArgumentException();
 		}
 	}
-	
+
 	/**
 	 * Build a sequence type by erasing the names of the fields.
 	 * @return Sequence type extracted from record fields.

@@ -82,9 +82,12 @@ public class Conditional implements Instruction {
 	 */
 	@Override
 	public boolean checkType() {
+		Boolean elseBranchOk = true;
 		Boolean conditionOk = this.condition.getType().compatibleWith(AtomicType.BooleanType);
 		Boolean thenBranchOk = this.thenBranch.checkType();
-		Boolean elseBranchOk = this.elseBranch.checkType();
+		if (this.elseBranch != null) {
+			elseBranchOk = this.elseBranch.checkType();
+		}
 		return conditionOk && thenBranchOk && elseBranchOk;
 	}
 
