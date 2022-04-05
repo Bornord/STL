@@ -29,3 +29,22 @@ return 1
 
 1 doit être compatible ave int. la
 FunctionDeclaration -> Parcourir Block (returnTo : FunctionDeclaration) -> Parcourir Instruction (returnTo : FunctionDeclaration) -> Parcourir Return -> Retourne un truc.
+
+### Code
+
+getCode de Assignement
+return value.getCode() + assignable.getCode()
+
+### Type
+
+equalsToCompatibleWith
+
+if (\_other istanceof NomDuType) {
+
+}
+-> formule : otherType otherType \_other
+if (otherType instanceof NamedType) {
+otherType = ((NamedType) otherType).getType();
+}
+
+if (otherType instanceof )

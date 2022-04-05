@@ -37,8 +37,6 @@ public class PointerType implements Type {
 	 */
 	@Override
 	public boolean compatibleWith(Type _other) {
-		System.out.println(_other);
-		System.out.println(this);
 		return _other.compatibleWith(this.element);
 	}
 

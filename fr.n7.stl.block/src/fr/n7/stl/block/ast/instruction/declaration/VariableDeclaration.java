@@ -110,7 +110,6 @@ public class VariableDeclaration implements Declaration, Instruction {
 		if (!_scope.contains(this.name) && this.value.collectAndBackwardResolve(_scope)) {
 			ok = true;
 			_scope.register(this);
-			//System.out.println(_scope.toString()+"Table = "+this.name);
 		} else {
 			ok = false;
 		}

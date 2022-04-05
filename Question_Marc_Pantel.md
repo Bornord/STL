@@ -1,8 +1,20 @@
 # Pour merge de la classe RecordType: définir un type commun
 
--> est-ce qu'on doit imaginer toutes les combinaisons possibles entre un RecordType et un autre type.
-ex : si le type \_other est un enchassement de RecordType avec un champ. on fait quoi, qu'est ce qu'on retourne ?
-Rep :
+int\* a = 3;
+int a = 4;
 
--> comment faire pour tester ? Comme avec Length ...
-Rep :
+-> refus
+
+# ça marche pas
+
+test {
+
+int *a = 2;
+*a = 3;
+}
+
+-> on associe un int avec un pointeur sur int -> aie.
+du coup :
+int i = 3;
+int *a = &i;
+*a = 3;

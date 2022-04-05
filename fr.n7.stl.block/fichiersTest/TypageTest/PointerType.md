@@ -13,6 +13,15 @@ test {
 }
 ```
 
+### Test sur l'affectation de pointer
+
+```c
+test {
+	int *a = 2;
+	a = 3;
+}
+```
+
 ## Test qui doivent échouer
 
 ### Tests pour vérifier que le typage fonctionne sur les pointeurs
