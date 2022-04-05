@@ -1,12 +1,23 @@
 test {
-	int *a = 3;
-	*a =5;
-}
+	int res = 0;
 
-// bonnne version : à faire
-test {
-	typedef struct p {
-		enum naturel { ZERO,Un, DEUX } n;
-	} nat;
-	enum naturel n = ZERO;
+	typedef struct p{
+		int x1;
+		Point p;
+	} Point;
+
+	typedef Point po;
+	int a = 3;
+	int b = 1;
+
+	po p = {a,null};
+
+	Point p2 = p;
 }
+// bonnne version : à faire
+//test {
+//	typedef struct p {
+//		enum naturel { ZERO,Un, DEUX } n;
+//	} nat;
+//	enum naturel n = ZERO;
+//}

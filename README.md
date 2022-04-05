@@ -47,4 +47,4 @@ if (otherType instanceof NamedType) {
 otherType = ((NamedType) otherType).getType();
 }
 
-if (otherType instanceof )
+if (otherType instanceof NOMDUTYPE )

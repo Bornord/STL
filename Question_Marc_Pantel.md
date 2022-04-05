@@ -1,11 +1,35 @@
-# Pour merge de la classe RecordType: définir un type commun
+# Pas traité pour
+
+-   ça doit marcher ?
+
+test {
+int res = 0;
+
+    typedef struct p{
+    	int x1;
+    	Point p;
+    } Point;
+
+    typedef Point po;
+    int a = 3;
+    int b = 1;
+
+    po p = {a,null};
+
+    Point p2 = p;
+
+}
+
+# Traité
+
+## Pour merge de la classe RecordType: définir un type commun
 
 int\* a = 3;
 int a = 4;
 
--> refus
+-> refus compilateur
 
-# ça marche pas
+## ça marche pas
 
 test {
 

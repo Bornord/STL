@@ -41,6 +41,25 @@ test {
 }
 ```
 
+```c
+test {
+	int res = 0;
+
+	typedef struct p{
+		int x1;
+		Point p;
+	} Point;
+
+	typedef Point po
+	int a = 3;
+	int b = 1;
+
+	po p = {a,null};
+
+	Point p2 = p;
+}
+```
+
 ### Test
 
 ## Test qui doivent échouer
@@ -83,5 +102,23 @@ test {
 	typedef struct p{
 	} Point;
 
+}
+```
+
+### test sur un champ de la sequence qui est différent du type de la définition.
+
+```c
+test {
+	int res = 0;
+
+	typedef struct p{
+		int x1;
+		int x2;
+	} Point;
+
+	int a = 3;
+	boolean b = false;
+
+	Point p = {a,b};
 }
 ```
