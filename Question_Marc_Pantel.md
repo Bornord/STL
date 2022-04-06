@@ -42,3 +42,5 @@ du coup :
 int i = 3;
 int *a = &i;
 *a = 3;
+
+# erreur linux
