@@ -11,9 +11,9 @@ test {
 	int b = 1;
 
 	po p = {a,null};
-
 	Point p2 = p;
 }
+
 // bonnne version : à faire
 //test {
 //	typedef struct p {
