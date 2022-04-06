@@ -8,10 +8,12 @@ import fr.n7.stl.block.ast.expression.Expression;
 import fr.n7.stl.block.ast.instruction.Instruction;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
+import fr.n7.stl.block.ast.type.AtomicType;
 import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
+import fr.n7.stl.tam.ast.impl.FragmentImpl;
 
 /**
  * Abstract Syntax Tree node for a variable declaration instruction.
@@ -45,6 +47,7 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 * i.e. the size of the memory allocated to the previous declared variables
 	 */
 	protected int offset;
+	protected int size;
 	
 	/**
 	 * Creates a variable declaration instruction node for the Abstract Syntax Tree.
@@ -140,7 +143,14 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		throw new SemanticsUndefinedException("Semantics allocateMemory is undefined in VariableDeclaration.");
+		register = _register;
+		size = type.length();
+		if(type.equalsTo(AtomicType.StringType)) {
+			size  = value.toString().length() + 2;
+		}
+		offset = _offset; 
+		//System.out.println("offset : " + offset);
+		return size;
 	}
 
 	/* (non-Javadoc)
@@ -148,7 +158,11 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics getCode is undefined in VariableDeclaration.");
+		FragmentImpl fragment = new FragmentImpl();
+		fragment.add(_factory.createPush(size));
+		fragment.append(value.getCode(_factory));
+		fragment.add(_factory.createStore(register, offset, size));
+		return fragment;
 	}
 
 }
