@@ -751,6 +751,7 @@ class CUP$Parser$actions {
 				SymbolTable tds = new SymbolTable();
 				if (bloc.collect(tds)) {
 					System.out.println("Collect succeeded : " + tds);
+					
 					if (bloc.resolve(tds)) {
 						System.out.println("Resolve succeeded.");
 						// ajouté à la main
