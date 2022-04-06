@@ -23,7 +23,11 @@ import fr.n7.stl.block.ast.instruction.declaration.*;
 import fr.n7.stl.block.ast.scope.*;
 import fr.n7.stl.block.ast.type.*;
 import fr.n7.stl.block.ast.type.declaration.*;
+import fr.n7.stl.tam.ast.Fragment;
+import fr.n7.stl.tam.ast.Register;
+import fr.n7.stl.tam.ast.impl.TAMFactoryImpl;
 import fr.n7.stl.util.*;
+
 
 /* Variables partagées dans les actions de l'analyseur syntaxique. */
 parser code {:
@@ -124,6 +128,10 @@ Program ::= UL_Identificateur:nom Bloc:bloc
 						bloc.toString();
 						if (bloc.checkType()){
 							System.out.println("Type checked");
+							TAMFactoryImpl factory = new TAMFactoryImpl();
+							bloc.allocateMemory(Register.SB,0);
+							Fragment fragment = bloc.getCode(factory);
+							System.out.println("fragments : " + fragment);
 						} else {
 							System.out.println("Type check failed");
 						}

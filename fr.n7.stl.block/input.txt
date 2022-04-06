@@ -3,14 +3,14 @@ test {
 
 	typedef struct p{
 		int x1;
-		Point p;
+		int x2;
 	} Point;
 
 	typedef Point po;
 	int a = 3;
 	int b = 1;
 
-	po p = {a,null};
+	po p = {a,b};
 	Point p2 = p;
 }
 
