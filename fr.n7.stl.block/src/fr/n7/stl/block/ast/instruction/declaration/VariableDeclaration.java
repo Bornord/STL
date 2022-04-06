@@ -133,8 +133,6 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public boolean checkType() {
-		System.out.println(this.type);
-		System.out.println(this.value.getType());
 		return this.type.compatibleWith(this.value.getType());
 	}
 

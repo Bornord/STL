@@ -95,6 +95,7 @@ public class RecordType implements Type, Declaration, Scope<FieldDeclaration> {
 		if (_other instanceof SequenceType) {
 			System.out.println("passage imbr");
 			System.out.println(_other.compatibleWith(this));
+			System.out.println("post cond");
 			return _other.compatibleWith(this);
 		} else if (_other instanceof RecordType) {
 			System.out.println("passage recordType");
