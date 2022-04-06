@@ -86,15 +86,18 @@ public class RecordType implements Type, Declaration, Scope<FieldDeclaration> {
 	@Override
 	public boolean compatibleWith(Type _other) {
 		System.out.println("Passage:");
-		System.out.println(this);
-		System.out.println(_other);
+		System.out.println(this.getClass());
+		System.out.println(_other.getClass());
 		if (_other instanceof NamedType) {
+			System.out.println("passage na");
 			_other = ((NamedType) _other).getType();
 		} 
 		if (_other instanceof SequenceType) {
 			System.out.println("passage imbr");
+			System.out.println(_other.compatibleWith(this));
 			return _other.compatibleWith(this);
 		} else if (_other instanceof RecordType) {
+			System.out.println("passage recordType");
 			if (this.fields.size() == ((RecordType) _other).fields.size()) {
 				Boolean ok = true;
 				for (int i=0 ; i<this.fields.size();i++){
