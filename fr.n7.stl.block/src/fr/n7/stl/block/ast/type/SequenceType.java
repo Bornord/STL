@@ -79,6 +79,9 @@ public class SequenceType implements Type {
 	 */
 	@Override
 	public boolean compatibleWith(Type _other) {
+		System.out.println("Passage Seq:");
+		System.out.println(this);
+		System.out.println(_other);
 		if (_other instanceof SequenceType) {
 			SequenceType _local = (SequenceType) _other;
 			if (this.types.size() == _local.types.size()) {
