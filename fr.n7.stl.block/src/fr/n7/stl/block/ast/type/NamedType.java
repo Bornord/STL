@@ -38,6 +38,7 @@ public class NamedType implements Type {
 	@Override
 	public boolean equalsTo(Type _other) {
 		if (_other instanceof NamedType) {
+			// pb avec Java. Typage par nom.
 			return (this.getType().equals(((NamedType) _other).getType()));
 		} else {
 			return (this.declaration.getType().equalsTo(_other));
