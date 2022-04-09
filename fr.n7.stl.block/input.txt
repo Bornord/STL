@@ -1,23 +1,4 @@
 test {
-	int res = 0;
-
-	typedef struct p{
-		int x1;
-		int x2;
-	} Point;
-
-	typedef Point po;
-	int a = 3;
-	int b = 1;
-
-	po p = {a,b};
-	Point p2 = p;
+	typedef enum naturel { ZERO, UN, DEUX } naturel;
+	naturel ele = UN;
 }
-
-// bonnne version : à faire
-//test {
-//	typedef struct p {
-//		enum naturel { ZERO,Un, DEUX } n;
-//	} nat;
-//	enum naturel n = ZERO;
-//}

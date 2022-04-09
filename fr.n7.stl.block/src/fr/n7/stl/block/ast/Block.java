@@ -60,15 +60,13 @@ public class Block {
 	 * allowed.
 	 */
 	public boolean collect(HierarchicalScope<Declaration> _scope) {
+		System.out.println("collect: " + _scope);
 		boolean ok = true;
 		this.local = new SymbolTable(_scope);
-		System.out.println("aperçu table des symbole pre"+_scope.toString());
 		for (Instruction instruction : instructions) {
 			ok = ok && instruction.collectAndBackwardResolve(local);
 		}
-		System.out.println("aperçu table des symbole"+_scope.toString());
-				System.out.println("ok:" + ok);
-
+		System.out.println("aperçu table des symbole \n"+_scope.toString());
 		return ok;
 	}
 	
@@ -80,6 +78,7 @@ public class Block {
 	 * block have been previously defined.
 	 */
 	public boolean resolve(HierarchicalScope<Declaration> _scope) {
+		System.out.println("resolve: "+ _scope);
 		boolean ok = true;
 		for (Instruction instruction : instructions) {
 			ok = ok && instruction.fullResolve(this.local);

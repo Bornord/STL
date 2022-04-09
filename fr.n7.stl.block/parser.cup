@@ -244,7 +244,7 @@ Type ::= Atomique:atomique
 			{: 
 				RESULT = new NamedType( nom ); 
 			:}
-				| UL_Inferieur Type:gauche UL_Virgule Type:droit UL_Superieur
+		| UL_Inferieur Type:gauche UL_Virgule Type:droit UL_Superieur
 			{:
 				RESULT = new CoupleType( gauche, droit );
 			:}

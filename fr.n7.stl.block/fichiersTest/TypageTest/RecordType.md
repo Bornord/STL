@@ -60,7 +60,26 @@ test {
 }
 ```
 
-### Test
+### Test l'affectation d'un type légèrement dénaturé
+
+```C
+test {
+int res = 0;
+
+    typedef struct p{
+    	int x1;
+    	int x2;
+    } Point;
+
+    typedef Point po;
+    int a = 3;
+    int b = 1;
+
+    po p = {a,b};
+    Point p2 = p;
+
+}
+```
 
 ## Test qui doivent échouer
 
@@ -120,5 +139,25 @@ test {
 	boolean b = false;
 
 	Point p = {a,b};
+}
+```
+
+### test sur les champs d'un recordType de la
+
+```C
+test {
+	int res = 0;
+
+	typedef struct p{
+		int x1;
+		int x2;
+	} Point;
+
+	typedef Point po;
+	int a = 3;
+	int b = 1;
+
+	po p = {a,b};
+	Point p2 = {a,p};
 }
 ```

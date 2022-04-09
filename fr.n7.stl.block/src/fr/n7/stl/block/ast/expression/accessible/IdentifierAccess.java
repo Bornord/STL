@@ -67,6 +67,7 @@ public class IdentifierAccess extends AbstractIdentifier implements AccessibleEx
 		/* This is the full resolve part that complements the backward resolve. */
 		/* If the resolution has not been done by the backward resolve */
 		if  (this.expression == null) {
+			System.out.println(this.name);
 			if (((HierarchicalScope<Declaration>)_scope).knows(this.name)) {
 				Declaration _declaration = _scope.get(this.name);
 				/* This kind should have been handled by partial resolve. */
