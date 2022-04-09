@@ -24,9 +24,9 @@ import fr.n7.stl.util.Logger;
  * TODO : Should also hold a function and not only a variable.
  */
 public class IdentifierAccess extends AbstractIdentifier implements AccessibleExpression {
-	
+
 	protected AbstractAccess expression;
-	
+
 	/**
 	 * Creates a variable use expression Abstract Syntax Tree node.
 	 * @param _name Name of the used variable.
@@ -34,7 +34,7 @@ public class IdentifierAccess extends AbstractIdentifier implements AccessibleEx
 	public IdentifierAccess(String _name) {
 		super(_name);
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -42,7 +42,7 @@ public class IdentifierAccess extends AbstractIdentifier implements AccessibleEx
 	public String toString() {
 		return this.name;
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.expression.Expression#collect(fr.n7.stl.block.ast.scope.HierarchicalScope)
 	 */

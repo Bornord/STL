@@ -34,7 +34,7 @@ public class EnumerationType implements Type, Declaration {
 	 */
 	@Override
 	public String toString() {
-		String _result = "enum" + this.name + " { ";
+		String _result = "enum" + " " + this.name + " { ";
 		Iterator<LabelDeclaration> _iter = this.labels.iterator();
 		if (_iter.hasNext()) {
 			_result += _iter.next();
