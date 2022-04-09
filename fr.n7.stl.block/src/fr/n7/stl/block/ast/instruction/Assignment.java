@@ -49,6 +49,7 @@ public class Assignment implements Instruction, Expression {
 	@Override
 	public boolean collectAndBackwardResolve(HierarchicalScope<Declaration> _scope) {
 		System.out.println("object assignable: "+this.assignable.toString().trim());
+		System.out.println(this.assignable.toString().trim());
 		if (_scope.knows(this.assignable.toString().trim())){
 			if (this.value.collectAndBackwardResolve(_scope)) {
 				return (this.assignable.collectAndBackwardResolve(_scope));
