@@ -25,7 +25,7 @@ import fr.n7.stl.util.Logger;
  */
 public class IdentifierAccess extends AbstractIdentifier implements AccessibleExpression {
 
-	protected AbstractAccess expression;
+	public AbstractAccess expression;
 
 	/**
 	 * Creates a variable use expression Abstract Syntax Tree node.

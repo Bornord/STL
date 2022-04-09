@@ -3,6 +3,7 @@ package fr.n7.stl.block.ast.expression;
 import java.lang.reflect.AnnotatedType;
 
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
+import fr.n7.stl.block.ast.expression.accessible.IdentifierAccess;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.type.Type;
@@ -48,16 +49,8 @@ public abstract class AbstractField implements Expression {
 		System.out.println("collect abs: ");
 		System.out.println(this.name);
 		System.out.println(this.field);
-		System.out.println(this.record.toString());
-		if (_scope.knows(this.record.toString())) {
- 			boolean bool = this.record.collectAndBackwardResolve(_scope);
-			 System.out.println("post collect pb");
-			 System.out.println(_scope);
-			return bool;
-		} else {
-			System.out.println("Attention pb dans absField");
-			return false;
-		}
+		System.out.println(this.record);
+		return this.record.collectAndBackwardResolve(_scope);
 	}
 
 	/* (non-Javadoc)
@@ -65,7 +58,8 @@ public abstract class AbstractField implements Expression {
 	 */
 	@Override
 	public boolean fullResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "resolve is undefined in AbstractField.");
+		return this.record.fullResolve(_scope);
+		// return this.field.fullResolve(_scope);
 	}
 
 	/**
@@ -73,7 +67,7 @@ public abstract class AbstractField implements Expression {
 	 * @return Synthesized Type of the expression.
 	 */
 	public Type getType() {
-		throw new SemanticsUndefinedException( "getType is undefined in FieldAccess.");
+		return this.record.getType();
 	}
 
 }
