@@ -50,6 +50,7 @@ public class TypeDeclaration implements Declaration, Instruction {
 	@Override
 	public boolean collectAndBackwardResolve(HierarchicalScope<Declaration> _scope) {
 		System.out.println(this.type.getClass());
+				System.out.println(_scope);
 		boolean ok = false;
 		if (!_scope.contains(this.name)) {
 			ok = true;

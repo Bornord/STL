@@ -143,9 +143,9 @@ public class VariableDeclaration implements Declaration, Instruction {
 	public int allocateMemory(Register _register, int _offset) {
 		register = _register;
 		size = type.length();
-		if(type.equalsTo(AtomicType.StringType)) {
-			size  = value.toString().length() + 2;
-		}
+		// if(type.equalsTo(AtomicType.StringType)) {
+		// 	size  = value.toString().length() + 2;
+		// }
 		offset = _offset; 
 		//System.out.println("offset : " + offset);
 		return size;

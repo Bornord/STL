@@ -65,7 +65,6 @@ public class Assignment implements Instruction, Expression {
 	 */
 	@Override
 	public boolean fullResolve(HierarchicalScope<Declaration> _scope) {
-			System.out.println(_scope.toString());
 			return this.value.fullResolve(_scope);
 	}
 

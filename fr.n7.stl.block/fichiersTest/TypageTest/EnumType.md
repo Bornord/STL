@@ -10,8 +10,8 @@
 
 ```c
 test {
-	typedef enum naturel { ZERO, UN, DEUX } naturel;
-	naturel ele = UN;
+	typedef enum nat { ZERO, UN, DEUX } naturel;
+	naturel ele = naturel.UN;
 }
 ```
 

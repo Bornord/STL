@@ -1,5 +1,7 @@
 package fr.n7.stl.block.ast.expression;
 
+import java.lang.reflect.AnnotatedType;
+
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
@@ -41,7 +43,11 @@ public abstract class AbstractField implements Expression {
 	 */
 	@Override
 	public boolean collectAndBackwardResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "collect is undefined in AbstractField.");
+		System.out.println("collect abs: ");
+		System.out.println(this.name);
+		System.out.println(this.field);
+		System.out.println(this.record.getClass());
+		return true;
 	}
 
 	/* (non-Javadoc)

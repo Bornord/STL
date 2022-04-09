@@ -29,14 +29,14 @@ public class First implements Expression {
 	public First(Expression _target) {
 		this.target = _target;
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
 		return "(fst" + this.target + ")";
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.expression.Expression#collect(fr.n7.stl.block.ast.scope.HierarchicalScope)
 	 */
@@ -52,7 +52,7 @@ public class First implements Expression {
 	public boolean fullResolve(HierarchicalScope<Declaration> _scope) {
 		throw new SemanticsUndefinedException("Semantics resolve undefined in First.");
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.Expression#getType()
 	 */
