@@ -1,24 +1,6 @@
-# Pas traité pour
+# Erreurs
 
--   ça doit marcher ?
-
-test {
-int res = 0;
-
-    typedef struct p{
-    	int x1;
-    	Point p;
-    } Point;
-
-    typedef Point po;
-    int a = 3;
-    int b = 1;
-
-    po p = {a,null};
-
-    Point p2 = p;
-
-}
+Erreur sur les FieldAccess.
 
 # Traité
 
