@@ -1,15 +1,6 @@
+
+
 test {
-	int res = 0;
-
-	typedef struct p{
-		int x1;
-		int x2;
-	} Point;
-
-	int a = 3;
-	int b = 1;
-
-	Point p = {a,b};
-	p.x1 = 5;
-
+	typedef enum nat { ZERO, UN, DEUX } naturel;
+	naturel ele = naturel.UN;
 }
