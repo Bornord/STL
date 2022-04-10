@@ -45,9 +45,11 @@ public abstract class AbstractField implements Expression {
 	@Override
 	public boolean collectAndBackwardResolve(HierarchicalScope<Declaration> _scope) {
 		System.out.println("Collect AbsField: ");
-		System.out.println(this.record);
+		System.out.println(this.record.getClass());
 		System.out.println(this.name);
 		System.out.println(this.field);
+		System.out.println("collect go");
+		this.record.collectAndBackwardResolve(_scope);
 		return this.record.collectAndBackwardResolve(_scope);
 	}
 
