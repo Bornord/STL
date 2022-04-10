@@ -50,7 +50,19 @@ public class EnumerationType implements Type, Declaration {
 	 */
 	@Override
 	public boolean equalsTo(Type _other) {
-		throw new SemanticsUndefinedException("Semantics equalsTo is not implemented in EnumerationType.");
+		if (_other instanceof EnumerationType) {
+			if (this.labels.size() == ((EnumerationType) _other).labels.size()) {
+				boolean ok = true;
+				for (int i = 0; i< this.labels.size(); i++) {
+					ok = ok && this.labels.get(i).getType().equals(this.labels.get(i).getType());
+				}
+				return ok;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 	}
 
 	/* (non-Javadoc)
@@ -58,7 +70,19 @@ public class EnumerationType implements Type, Declaration {
 	 */
 	@Override
 	public boolean compatibleWith(Type _other) {
-		throw new SemanticsUndefinedException("Semantics compatibleWith is not implemented in EnumerationType.");
+		if (_other instanceof EnumerationType) {
+			if (this.labels.size() == ((EnumerationType) _other).labels.size()) {
+				boolean ok = true;
+				for (int i = 0; i< this.labels.size(); i++) {
+					ok = ok && this.labels.get(i).getType().compatibleWith(this.labels.get(i).getType());
+				}
+				return ok;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}	
 	}
 
 	/* (non-Javadoc)

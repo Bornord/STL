@@ -6,6 +6,9 @@ import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.expression.accessible.IdentifierAccess;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
+import fr.n7.stl.block.ast.type.AtomicType;
+import fr.n7.stl.block.ast.type.NamedType;
+import fr.n7.stl.block.ast.type.RecordType;
 import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.block.ast.type.declaration.FieldDeclaration;
 
@@ -44,11 +47,6 @@ public abstract class AbstractField implements Expression {
 	 */
 	@Override
 	public boolean collectAndBackwardResolve(HierarchicalScope<Declaration> _scope) {
-		System.out.println("Collect AbsField: ");
-		System.out.println(this.record.getClass());
-		System.out.println(this.name);
-		System.out.println(this.field);
-		System.out.println("collect go");
 		return this.record.collectAndBackwardResolve(_scope);
 	}
 
@@ -66,7 +64,21 @@ public abstract class AbstractField implements Expression {
 	 * @return Synthesized Type of the expression.
 	 */
 	public Type getType() {
-		return this.record.getType();
+		Type type =  this.record.getType();
+		RecordType recordType;
+		if (type instanceof NamedType) {
+			type = ((NamedType) type).getType();
+		}
+		if (type instanceof RecordType) {
+			recordType = (RecordType) type;
+			if (recordType.contains(this.name)) {
+				this.field = recordType.get(this.name);
+				return this.field.getType();
+			} else {
+				return AtomicType.ErrorType;
+			}
+		} else {
+			return AtomicType.ErrorType;
+		}
 	}
-
 }
