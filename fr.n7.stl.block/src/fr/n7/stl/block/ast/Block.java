@@ -63,6 +63,8 @@ public class Block {
 		boolean ok = true;
 		this.local = new SymbolTable(_scope);
 		for (Instruction instruction : instructions) {
+			System.out.println("\t Traitement de l'instruction: ");
+			System.out.println(instruction);
 			ok = ok && instruction.collectAndBackwardResolve(local);
 		}
 		System.out.println("aperçu table des symbole \n"+_scope.toString());
@@ -91,7 +93,6 @@ public class Block {
 	public boolean checkType() {
 		boolean ok = true;
 		for (Instruction instruction : instructions) {
-			System.out.println(instruction);
 			ok = ok && instruction.checkType();
 			if (!ok) {
 				break;

@@ -10,5 +10,6 @@ test {
 	int b = 1;
 
 	Point p = {a,b};
-	p.x1 = 3;
+	p.x1 = 5;
+
 }
