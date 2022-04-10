@@ -29,7 +29,11 @@ public class PointerType implements Type {
 	 */
 	@Override
 	public boolean equalsTo(Type _other) {
-		return this.element.equalsTo(_other);
+		if (_other instanceof PointerType) {
+			return this.element.equalsTo(((PointerType) _other).element);
+		} else { 
+			return false;
+		}
 	}
 
 	/* (non-Javadoc)
@@ -37,7 +41,14 @@ public class PointerType implements Type {
 	 */
 	@Override
 	public boolean compatibleWith(Type _other) {
-		return _other.compatibleWith(this.element);
+		if (_other instanceof NamedType){
+			_other = ((NamedType) _other).getType();
+		}
+		if (_other instanceof PointerType) {
+			return this.element.compatibleWith(((PointerType) _other).element);
+		} else {
+			return false;
+		}
 	}
 
 	/* (non-Javadoc)

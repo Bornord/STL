@@ -9,6 +9,8 @@ import fr.n7.stl.block.ast.instruction.Instruction;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.scope.SymbolTable;
+import fr.n7.stl.block.ast.type.AtomicType;
+import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
@@ -63,16 +65,9 @@ public class Block {
 		boolean ok = true;
 		this.local = new SymbolTable(_scope);
 		for (Instruction instruction : instructions) {
-			System.out.println("\t Traitement de l'instruction: ");
-			System.out.println(instruction);
 			boolean bool = instruction.collectAndBackwardResolve(local);
-			System.out.println(bool);
 			ok = ok && bool;
-			System.out.println(" \t \t" + ok);
-
-
 		}
-		System.out.println("aperçu table des symbole \n"+_scope.toString());
 		return ok;
 	}
 	
@@ -99,13 +94,24 @@ public class Block {
 		boolean ok = true;
 		for (Instruction instruction : instructions) {
 			ok = ok && instruction.checkType();
-			if (!ok) {
-				break;
-			} else {
-			};
 		} 
 		return ok;
 	}
+
+
+	public Type getReturnType() {
+		boolean ok = true;
+		for (Instruction instruction : instructions) {
+			ok = ok && instruction.getReturnType() == AtomicType.VoidType;
+		}
+		if (ok) {
+			return AtomicType.VoidType;
+		} else {
+			return AtomicType.ErrorType;
+		}
+	}
+
+
 
 	/**
 	 * Inherited Semantics attribute to allocate memory for the variables declared in the instruction.

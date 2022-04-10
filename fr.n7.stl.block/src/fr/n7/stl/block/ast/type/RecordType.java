@@ -69,10 +69,16 @@ public class RecordType implements Type, Declaration, Scope<FieldDeclaration> {
 	 */
 	@Override
 	public boolean equalsTo(Type _other) {
-		if (_other instanceof SequenceType) {
-			return _other.equalsTo(this);
-		} else if (_other instanceof NamedType) {
-			return _other.equalsTo(this);
+		if (_other instanceof RecordType) {
+			if (this.fields.size() == ((RecordType) _other).fields.size()) {
+				Boolean ok = true;
+				for (int i=0 ; i<this.fields.size();i++){
+					this.fields.get(i).getType().equalsTo(((RecordType)_other).fields.get(i).getType());
+				}
+				return ok;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
@@ -85,13 +91,10 @@ public class RecordType implements Type, Declaration, Scope<FieldDeclaration> {
 
 	@Override
 	public boolean compatibleWith(Type _other) {
-
 		if (_other instanceof NamedType) {
 			_other = ((NamedType) _other).getType();
 		} 
-		if (_other instanceof SequenceType) {
-			return _other.compatibleWith(this);
-		} else if (_other instanceof RecordType) {
+		if (_other instanceof RecordType) {
 			if (this.fields.size() == ((RecordType) _other).fields.size()) {
 				Boolean ok = true;
 				for (int i=0 ; i<this.fields.size();i++){

@@ -8,6 +8,7 @@ import fr.n7.stl.block.ast.expression.Expression;
 import fr.n7.stl.block.ast.instruction.Instruction;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
+import fr.n7.stl.block.ast.type.AtomicType;
 import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
@@ -83,15 +84,14 @@ public class ConstantDeclaration implements Instruction, Declaration {
 	 */
 	@Override
 	public boolean collectAndBackwardResolve(HierarchicalScope<Declaration> _scope) {
-		boolean ok = false;
-		if (!_scope.contains(this.name)) {
-			ok = true;
+		if (_scope.accepts(this)) {
 			_scope.register(this);
+			return this.value.collectAndBackwardResolve(_scope);
 			//System.out.println(_scope.toString()+"Table = "+this.name);
 		} else {
-			ok = false;
+			return false;
 		}
-		return ok;	}
+	}
 	
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.instruction.Instruction#resolve(fr.n7.stl.block.ast.scope.Scope)
@@ -109,6 +109,10 @@ public class ConstantDeclaration implements Instruction, Declaration {
 		return this.type.compatibleWith(this.value.getType());
 	}
 
+	@Override
+	public Type getReturnType() {
+		return AtomicType.VoidType;
+	}
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.Instruction#allocateMemory(fr.n7.stl.tam.ast.Register, int)
 	 */

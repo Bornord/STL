@@ -8,6 +8,7 @@ import fr.n7.stl.block.ast.expression.Expression;
 import fr.n7.stl.block.ast.expression.assignable.AssignableExpression;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
+import fr.n7.stl.block.ast.type.AtomicType;
 import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
@@ -48,24 +49,9 @@ public class Assignment implements Instruction, Expression {
 	 */
 	@Override
 	public boolean collectAndBackwardResolve(HierarchicalScope<Declaration> _scope) {
-		System.out.println("object assignable: "+this.assignable.toString().trim());
-		System.out.println("value: "+this.assignable.getClass());
-		System.out.println("Test");
-		System.out.println(_scope);
-		System.out.println(this.assignable);
-		if (_scope.knows(this.assignable.toString().trim())){
-			if (this.value.collectAndBackwardResolve(_scope)) {
-				System.out.println("vrai vrai");
-				boolean bool = this.assignable.collectAndBackwardResolve(_scope);
-				return (bool);
-			} else {
-				System.out.println("vrai faux");
-				return false;
-			}
-		} else {
-			System.out.println("faux");
-			return false;
-		}
+			boolean bool1 = this.assignable.collectAndBackwardResolve(_scope);
+			boolean bool2 = this.value.collectAndBackwardResolve(_scope);
+			return bool1 && bool2;
 	}	
 
 	/* (non-Javadoc)
@@ -73,7 +59,9 @@ public class Assignment implements Instruction, Expression {
 	 */
 	@Override
 	public boolean fullResolve(HierarchicalScope<Declaration> _scope) {
-			return this.value.fullResolve(_scope);
+		boolean bool1 = this.value.fullResolve(_scope);
+		boolean bool2 = this.assignable.fullResolve(_scope);
+		return bool1 && bool2;
 	}
 
 	/* (non-Javadoc)
@@ -95,9 +83,15 @@ public class Assignment implements Instruction, Expression {
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.Instruction#allocateMemory(fr.n7.stl.tam.ast.Register, int)
 	 */
+
+	@Override
+	public Type getReturnType() {
+		return AtomicType.VoidType;
+	}
+
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		throw new SemanticsUndefinedException( "Semantics allocateMemory is undefined in Assignment.");
+		return this.assignable.getType().length();
 	}
 
 	/* (non-Javadoc)
@@ -105,7 +99,9 @@ public class Assignment implements Instruction, Expression {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException( "Semantics getCode is undefined in Assignment.");
-	}
+		Fragment _result = _factory.createFragment();
+		_result.append(this.value.getCode(_factory));
+		_result.append(this.assignable.getCode(_factory));
+		return _result;	}
 
 }

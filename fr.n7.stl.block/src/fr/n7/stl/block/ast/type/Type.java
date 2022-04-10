@@ -57,5 +57,6 @@ public interface Type {
 
 	 */
 	public boolean resolve(HierarchicalScope<Declaration> _scope);
+
 	
 }

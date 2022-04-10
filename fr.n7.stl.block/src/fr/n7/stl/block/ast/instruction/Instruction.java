@@ -4,6 +4,7 @@
 package fr.n7.stl.block.ast.instruction;
 
 import fr.n7.stl.block.ast.scope.Declaration;
+import fr.n7.stl.block.ast.type.*;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
@@ -51,6 +52,8 @@ public interface Instruction {
 	 */
 	public int allocateMemory(Register _register, int _offset);
 	
+	public Type getReturnType();
+
 	/**
 	 * Inherited Semantics attribute to build the nodes of the abstract syntax tree for the generated TAM code.
 	 * Synthesized Semantics attribute that provide the generated TAM code.

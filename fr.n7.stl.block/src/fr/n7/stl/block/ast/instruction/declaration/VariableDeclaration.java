@@ -9,6 +9,7 @@ import fr.n7.stl.block.ast.instruction.Instruction;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.type.AtomicType;
+import fr.n7.stl.block.ast.type.NamedType;
 import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
@@ -109,14 +110,12 @@ public class VariableDeclaration implements Declaration, Instruction {
 
 	@Override
 	public boolean collectAndBackwardResolve(HierarchicalScope<Declaration> _scope) {
-		boolean ok = false;
-		if (!_scope.contains(this.name) && this.value.collectAndBackwardResolve(_scope)) {
-			ok = true;
+		if (_scope.accepts(this)) {
 			_scope.register(this);
+			return this.value.collectAndBackwardResolve(_scope);
 		} else {
-			ok = false;
+			return false;
 		}
-		return ok;
 	}
 
 	/* (non-Javadoc)
@@ -133,7 +132,15 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public boolean checkType() {
-		return this.type.compatibleWith(this.value.getType());
+		if (this.type instanceof NamedType) {
+			this.type = ((NamedType) this.type).getType();
+		}
+		return this.value.getType().compatibleWith(this.type);
+	}
+
+	@Override 
+	public Type getReturnType() {
+		return AtomicType.VoidType;
 	}
 
 	/* (non-Javadoc)
@@ -148,6 +155,8 @@ public class VariableDeclaration implements Declaration, Instruction {
 		// }
 		offset = _offset; 
 		//System.out.println("offset : " + offset);
+		// TODO : 
+		// Ajouter l'offSet Antoine ?
 		return size;
 	}
 

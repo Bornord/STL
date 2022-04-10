@@ -4,6 +4,7 @@ import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.instruction.Instruction;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
+import fr.n7.stl.block.ast.type.AtomicType;
 import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
@@ -49,17 +50,12 @@ public class TypeDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public boolean collectAndBackwardResolve(HierarchicalScope<Declaration> _scope) {
-		System.out.println(this.type.getClass());
-				System.out.println(_scope);
-		boolean ok = false;
-		if (!_scope.contains(this.name)) {
-			ok = true;
+		if (_scope.accepts(this)) {
 			_scope.register(this);
-			System.out.println(_scope.toString()+"Table = "+this.name);
+			return true;
 		} else {
-			ok = false;
+			return false;
 		}
-		return ok;
 	}
 
 	/* (non-Javadoc)
@@ -92,6 +88,11 @@ public class TypeDeclaration implements Declaration, Instruction {
 	@Override
 	public boolean checkType() {
 		return true;
+	}
+
+	@Override
+	public Type getReturnType(){
+		return AtomicType.VoidType;
 	}
 
 	/* (non-Javadoc)
