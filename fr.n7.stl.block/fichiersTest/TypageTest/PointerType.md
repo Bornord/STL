@@ -17,8 +17,9 @@ test {
 
 ```c
 test {
-	int *a = 2;
-	a = 3;
+	int i = 3;
+	int *a = &i;
+	*a = 3;
 }
 ```
 

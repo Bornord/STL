@@ -36,7 +36,11 @@ public class VariableAssignment extends AbstractIdentifier implements Assignable
 	 */
 	@Override
 	public boolean collectAndBackwardResolve(HierarchicalScope<Declaration> _scope) {
+		System.out.println("\t tour dans VariableAssignement");
+		System.out.println(this);
+		System.out.println(_scope);
 		if (((HierarchicalScope<Declaration>)_scope).knows(this.name)) {
+			System.out.println(this.name);
 			Declaration _declaration = _scope.get(this.name);
 			if (_declaration instanceof VariableDeclaration) {
 				this.declaration = ((VariableDeclaration) _declaration);

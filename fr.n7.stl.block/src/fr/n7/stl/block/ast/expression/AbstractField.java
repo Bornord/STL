@@ -49,7 +49,6 @@ public abstract class AbstractField implements Expression {
 		System.out.println(this.name);
 		System.out.println(this.field);
 		System.out.println("collect go");
-		this.record.collectAndBackwardResolve(_scope);
 		return this.record.collectAndBackwardResolve(_scope);
 	}
 

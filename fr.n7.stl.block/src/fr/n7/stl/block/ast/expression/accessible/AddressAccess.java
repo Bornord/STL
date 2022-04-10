@@ -29,7 +29,10 @@ public class AddressAccess implements AccessibleExpression {
 	 */
 	@Override
 	public boolean collectAndBackwardResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "collect is undefined in AddressAccess.");	
+		System.out.println("tour dans adressAccess");
+		System.out.println(this.assignable);
+		System.out.println(_scope);
+		return this.assignable.collectAndBackwardResolve(_scope);
 	}
 
 	/* (non-Javadoc)

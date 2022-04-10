@@ -65,7 +65,12 @@ public class Block {
 		for (Instruction instruction : instructions) {
 			System.out.println("\t Traitement de l'instruction: ");
 			System.out.println(instruction);
-			ok = ok && instruction.collectAndBackwardResolve(local);
+			boolean bool = instruction.collectAndBackwardResolve(local);
+			System.out.println(bool);
+			ok = ok && bool;
+			System.out.println(" \t \t" + ok);
+
+
 		}
 		System.out.println("aperçu table des symbole \n"+_scope.toString());
 		return ok;

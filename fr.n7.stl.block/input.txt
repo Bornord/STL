@@ -1,6 +1,5 @@
-
-
 test {
-	typedef enum nat { ZERO, UN, DEUX } naturel;
-	naturel ele = naturel.UN;
+	int i = 3;
+	int *a = &i;
+	*a = 3;
 }

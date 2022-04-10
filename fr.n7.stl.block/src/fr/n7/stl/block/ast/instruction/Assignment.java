@@ -51,14 +51,19 @@ public class Assignment implements Instruction, Expression {
 		System.out.println("object assignable: "+this.assignable.toString().trim());
 		System.out.println("value: "+this.assignable.getClass());
 		System.out.println("Test");
-		System.out.println(this.assignable.collectAndBackwardResolve(_scope));
+		System.out.println(_scope);
+		System.out.println(this.assignable);
 		if (_scope.knows(this.assignable.toString().trim())){
 			if (this.value.collectAndBackwardResolve(_scope)) {
-				return (this.assignable.collectAndBackwardResolve(_scope));
+				System.out.println("vrai vrai");
+				boolean bool = this.assignable.collectAndBackwardResolve(_scope);
+				return (bool);
 			} else {
+				System.out.println("vrai faux");
 				return false;
 			}
 		} else {
+			System.out.println("faux");
 			return false;
 		}
 	}	

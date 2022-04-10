@@ -39,7 +39,10 @@ public abstract class AbstractPointer implements Expression {
 	 */
 	@Override
 	public boolean collectAndBackwardResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException("Semantics collect is not implemented in AbstractPointer.");		
+		System.out.println("\t tour dans AbsPointer");
+		System.out.println(this);
+		System.out.println(this.pointer.getClass());
+		return this.pointer.collectAndBackwardResolve(_scope);
 	}
 	
 	/* (non-Javadoc)
