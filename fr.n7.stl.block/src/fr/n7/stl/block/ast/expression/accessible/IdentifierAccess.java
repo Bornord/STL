@@ -8,9 +8,11 @@ import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.expression.AbstractAccess;
 import fr.n7.stl.block.ast.instruction.declaration.ConstantDeclaration;
 import fr.n7.stl.block.ast.instruction.declaration.ParameterDeclaration;
+import fr.n7.stl.block.ast.instruction.declaration.TypeDeclaration;
 import fr.n7.stl.block.ast.instruction.declaration.VariableDeclaration;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
+import fr.n7.stl.block.ast.type.EnumerationType;
 import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.TAMFactory;
@@ -85,8 +87,14 @@ public class IdentifierAccess extends AbstractIdentifier implements AccessibleEx
 							this.expression = new ParameterAccess((ParameterDeclaration) _declaration);
 							return true;
 						} else {
+							if (_declaration instanceof TypeDeclaration && ((TypeDeclaration) _declaration).getType() instanceof EnumerationType) {
+							this.expression = new AbstractField((EnumerationType) _declaration,this.toString());
+							return true;
+							} else {
+							System.out.println(this);
 							Logger.error("The declaration for " + this.name + " is of the wrong kind.");
 							return false;
+							}
 						}
 					}
 				}
