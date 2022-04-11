@@ -3,8 +3,8 @@
  */
 package fr.n7.stl.block.ast.instruction;
 
-import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.expression.Expression;
+import fr.n7.stl.block.ast.expression.accessible.AccessibleExpression;
 import fr.n7.stl.block.ast.expression.assignable.AssignableExpression;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
@@ -91,7 +91,7 @@ public class Assignment implements Instruction, Expression {
 
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		return this.assignable.getType().length();
+		return 0;
 	}
 
 	/* (non-Javadoc)
@@ -99,9 +99,13 @@ public class Assignment implements Instruction, Expression {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		Fragment _result = _factory.createFragment();
-		_result.append(this.value.getCode(_factory));
-		_result.append(this.assignable.getCode(_factory));
-		return _result;	}
+		Fragment frag = this.value.getCode(_factory);
+		if (this.value instanceof AccessibleExpression) {
+			frag.add(_factory.createLoadI(this.value.getType().length()));
+		}
+		frag.append(this.assignable.getCode(_factory));
+		frag.add(_factory.createStoreI(this.getType().length()));
+		return frag;
+	}
 
 }
