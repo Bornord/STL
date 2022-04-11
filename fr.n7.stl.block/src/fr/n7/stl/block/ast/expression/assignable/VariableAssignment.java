@@ -7,9 +7,11 @@ import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.expression.AbstractIdentifier;
 import fr.n7.stl.block.ast.instruction.declaration.ConstantDeclaration;
 import fr.n7.stl.block.ast.instruction.declaration.ParameterDeclaration;
+import fr.n7.stl.block.ast.instruction.declaration.TypeDeclaration;
 import fr.n7.stl.block.ast.instruction.declaration.VariableDeclaration;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
+import fr.n7.stl.block.ast.type.EnumerationType;
 import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.TAMFactory;
@@ -55,9 +57,14 @@ public class VariableAssignment extends AbstractIdentifier implements Assignable
 			} else if (_declaration instanceof ParameterDeclaration) {
 				this.declaration = ((ParameterDeclaration) _declaration);
 				return true;
-			} else {
+			} else {	
+				if (_declaration instanceof TypeDeclaration && ((TypeDeclaration) _declaration).getType() instanceof EnumerationType) {
+					// this.expression = new FieldAccess(((EnumerationType) _declaration),this.toString());
+					return true;
+				} else {
 				Logger.error("The declaration for " + this.name + " is of the wrong kind.");
-				return false;
+					return false;
+				}
 			}
 		} else {
 			Logger.error("The identifier " + this.name + " has not been found.");

@@ -1,4 +1,4 @@
 test {
-	typedef enum nat { ZERO, UN, DEUX } naturel;
-	naturel ele = naturel.UN;
+	int tab[] = new int[5];
+	tab[4] = 3;
 }

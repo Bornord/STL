@@ -6,6 +6,7 @@ package fr.n7.stl.block.ast.expression.accessible;
 import fr.n7.stl.block.ast.expression.AbstractIdentifier;
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.expression.AbstractAccess;
+import fr.n7.stl.block.ast.expression.AbstractField;
 import fr.n7.stl.block.ast.instruction.declaration.ConstantDeclaration;
 import fr.n7.stl.block.ast.instruction.declaration.ParameterDeclaration;
 import fr.n7.stl.block.ast.instruction.declaration.TypeDeclaration;
@@ -88,8 +89,8 @@ public class IdentifierAccess extends AbstractIdentifier implements AccessibleEx
 							return true;
 						} else {
 							if (_declaration instanceof TypeDeclaration && ((TypeDeclaration) _declaration).getType() instanceof EnumerationType) {
-							this.expression = new AbstractField((EnumerationType) _declaration,this.toString());
-							return true;
+								// this.expression = new FieldAccess(((EnumerationType) _declaration),this.toString());
+								return true;
 							} else {
 							System.out.println(this);
 							Logger.error("The declaration for " + this.name + " is of the wrong kind.");
