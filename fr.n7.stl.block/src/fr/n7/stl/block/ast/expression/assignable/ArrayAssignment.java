@@ -3,11 +3,14 @@
  */
 package fr.n7.stl.block.ast.expression.assignable;
 
-import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.expression.AbstractArray;
+import fr.n7.stl.block.ast.expression.BinaryOperator;
 import fr.n7.stl.block.ast.expression.Expression;
+import fr.n7.stl.block.ast.expression.accessible.AccessibleExpression;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.TAMFactory;
+import fr.n7.stl.tam.ast.impl.FragmentImpl;
+import fr.n7.stl.block.ast.type.CoupleType;
 
 /**
  * Abstract Syntax Tree node for an expression whose computation assigns a cell in an array.
@@ -29,7 +32,15 @@ public class ArrayAssignment extends AbstractArray implements AssignableExpressi
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics getCode undefined in ArrayAssignment.");
+		Fragment frag = this.array.getCode(_factory);
+		frag.append(this.index.getCode(_factory));
+		if (this.index instanceof AccessibleExpression) {
+			frag.add(_factory.createLoadI( ( (CoupleType) this.index.getType() ).getSecond().length()) );
+		}
+		frag.add(TAMFactory.createBinaryOperator(BinaryOperator.Add));
+		frag.addComment(this.toString() + " start");
+		frag.addSuffix(";" + this.toString() + " end");
+		return frag;
 	}
 
 	
