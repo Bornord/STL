@@ -5,11 +5,13 @@ package fr.n7.stl.block.ast.instruction;
 
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.expression.Expression;
+import fr.n7.stl.block.ast.expression.accessible.AccessibleExpression;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.type.AtomicType;
 import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
+import fr.n7.stl.tam.ast.Library;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
 
@@ -68,7 +70,7 @@ public class Printer implements Instruction {
 	 */
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		throw new SemanticsUndefinedException("Semantics allocateMemory undefined in Printer.");
+		return 0;
 	}
 
 	/* (non-Javadoc)
@@ -76,7 +78,24 @@ public class Printer implements Instruction {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics getCode undefined in Printer.");
+		Fragment frag = this.parameter.getCode(_factory);
+		if (this.parameter instanceof AccessibleExpression) {
+			frag.add(_factory.createLoadI(this.parameter.getType().length()));
+		}
+		if(this.parameter.getType() == AtomicType.BooleanType) {
+			frag.add(Library.BOut);
+		} else if(this.parameter.getType() == AtomicType.CharacterType) {
+			frag.add(Library.COut);
+		} else if(this.parameter.getType() == AtomicType.IntegerType) {
+			frag.add(Library.IOut);
+		} else if(this.parameter.getType() == AtomicType.FloatingType) {
+			frag.add(Library.IOut);
+		} else if(this.parameter.getType() == AtomicType.StringType) {
+			frag.add(Library.SOut);
+		} else {
+			frag.add(Library.SOut);
+		}
+		return frag;
 	}
 
 }

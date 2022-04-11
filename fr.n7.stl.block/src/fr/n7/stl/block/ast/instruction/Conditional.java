@@ -7,6 +7,7 @@ import java.util.Optional;
 import fr.n7.stl.block.ast.Block;
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.expression.Expression;
+import fr.n7.stl.block.ast.expression.accessible.AccessibleExpression;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.type.AtomicType;
@@ -22,6 +23,7 @@ import fr.n7.stl.tam.ast.TAMFactory;
  */
 public class Conditional implements Instruction {
 
+	private static int nbConditionnel;
 	protected Expression condition;
 	protected Block thenBranch;
 	protected Block elseBranch;
@@ -111,7 +113,11 @@ public class Conditional implements Instruction {
 	 */
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		throw new SemanticsUndefinedException( "Semantics allocateMemory is undefined in Conditional.");
+		this.thenBranch.allocateMemory(_register, _offset);
+		if (this.elseBranch != null) { 
+			this.elseBranch.allocateMemory(_register, _offset); 
+		}
+		return 0;
 	}
 
 	/* (non-Javadoc)
@@ -119,7 +125,22 @@ public class Conditional implements Instruction {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException( "Semantics getCode is undefined in Conditional.");
+		Fragment frag = this.condition.getCode(_factory);
+		if (this.condition instanceof AccessibleExpression) {
+			frag.add(_factory.createLoadI(this.condition.getType().length()));
+		}
+		int nb = Conditional.nbConditionnel++;
+		frag.add(_factory.createJumpIf("elseBranch_" + nb, 0));
+		frag.append(this.thenBranch.getCode(_factory));
+		frag.add(_factory.createJump("finIf_" + nb));
+		frag.addSuffix("elseBranch_" + nb);
+		Fragment elseFrag = _factory.createFragment();
+		if (this.elseBranch != null) {
+			elseFrag.append(this.elseBranch.getCode(_factory));
+		}
+		frag.append(elseFrag);
+		frag.addSuffix("finIf_" + nb);
+		return frag;
 	}
 
 }
