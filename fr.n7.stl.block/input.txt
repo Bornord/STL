@@ -1,22 +1,4 @@
 test {
-	int res = 0;
-
-	typedef struct p{
-		int x1;
-		int x2;
-	} Point;
-
-	int a = 3;
-	int b = 1;
-
-	Point pp = {a,b};
-	Point ppp = {a+1, b+2};
-
-	typedef struct d{
-		Point p1;
-		Point p2;
-	} Droite;
-
-	Droite d = {pp,ppp};
-	d.x1 = 3;
+	<int,boolean> t = <4,false>;
+	<int,<int,boolean>> c = <2,t>;
 }
