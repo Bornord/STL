@@ -1,4 +1,5 @@
 test {
 	<int,boolean> t = <4,false>;
 	<int,<int,boolean>> c = <2,t>;
+	int k = fst c;
 }
