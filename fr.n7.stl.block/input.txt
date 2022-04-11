@@ -1,6 +1,6 @@
 test {
 
- 	int test( boolean bool )
+ 	int vsvn( boolean bool )
 	{
 		if (bool) {
 			return 3;
@@ -8,5 +8,5 @@ test {
 			return false;
 		}
 	}
-	int dsbndkjbv = test(true);
+	int dsbndkjbv = vsvn(true);
 }

@@ -144,9 +144,6 @@ public class FunctionDeclaration implements Instruction, Declaration {
 	 */
 	@Override
 	public boolean checkType() {
-		System.out.println("FunctDecl: checkType");
-		System.out.println(body.getReturnType());
-		System.out.println(this.type);
 		if (body.getReturnType() != this.type) {
 			return false;
 		}

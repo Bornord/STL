@@ -102,7 +102,6 @@ public class FunctionCall implements Expression {
 	 */
 	@Override
 	public Type getType() {
-		System.out.println("FunctionCall");
 		List<Type> argType = new ArrayList<Type>();
 		if (this.function.getType() instanceof FunctionType) {
 			FunctionType funcType = (FunctionType) this.function.getType();
