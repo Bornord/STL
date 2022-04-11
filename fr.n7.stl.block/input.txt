@@ -6,8 +6,17 @@ test {
 		int x2;
 	} Point;
 
+
 	int a = 3;
 	int b = 1;
+
+	if (a == 3) {
+		printf("Code qui fonctionne");
+	} 
+
+	while (a!=b) {
+		b=3;
+	}
 
 	Point pp = {a,b};
 	Point ppp = {a+1, b+2};

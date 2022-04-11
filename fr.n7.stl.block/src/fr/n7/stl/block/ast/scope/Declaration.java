@@ -1,6 +1,7 @@
 package fr.n7.stl.block.ast.scope;
 
 import fr.n7.stl.block.ast.type.Type;
+import fr.n7.stl.tam.ast.Register;
 
 /**
  * @author Marc Pantel
