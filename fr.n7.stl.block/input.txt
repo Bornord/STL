@@ -1,12 +1,22 @@
 test {
+	int res = 0;
 
- 	int vsvn( boolean bool )
-	{
-		if (bool) {
-			return 3;
-		} else {
-			return false;
-		}
-	}
-	int dsbndkjbv = vsvn(true);
+	typedef struct p{
+		int x1;
+		int x2;
+	} Point;
+
+	int a = 3;
+	int b = 1;
+
+	Point pp = {a,b};
+	Point ppp = {a+1, b+2};
+
+	typedef struct d{
+		Point p1;
+		Point p2;
+	} Droite;
+
+	Droite d = {pp,ppp};
+	d.x1 = 3;
 }
