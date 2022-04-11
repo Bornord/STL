@@ -3,6 +3,7 @@
  */
 package fr.n7.stl.block.ast.instruction.declaration;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -11,7 +12,9 @@ import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.instruction.Instruction;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
+import fr.n7.stl.block.ast.scope.SymbolTable;
 import fr.n7.stl.block.ast.type.AtomicType;
+import fr.n7.stl.block.ast.type.FunctionType;
 import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
@@ -33,6 +36,8 @@ public class FunctionDeclaration implements Instruction, Declaration {
 	 */
 	protected Type type;
 	
+	protected HierarchicalScope<Declaration> local;
+
 	/**
 	 * List of AST nodes for the formal parameters of the function
 	 */
@@ -93,7 +98,15 @@ public class FunctionDeclaration implements Instruction, Declaration {
 	 */
 	@Override
 	public Type getType() {
-		return this.type;
+		if (!this.body.getReturnType().compatibleWith(this.type)) {
+			return AtomicType.ErrorType;
+		}
+
+		List<Type> parametersType = new ArrayList<Type>();
+		for (ParameterDeclaration p : this.parameters){
+			parametersType.add(p.getType());
+		}
+		return new FunctionType(this.type, parametersType);
 	}
 	
 	/* (non-Javadoc)
@@ -101,15 +114,29 @@ public class FunctionDeclaration implements Instruction, Declaration {
 	 */
 	@Override
 	public boolean collectAndBackwardResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics collect is undefined in FunctionDeclaration.");
+		if (_scope.accepts(this)) {
+			_scope.register(this);
+			local = new SymbolTable(_scope);
+			for (ParameterDeclaration p : this.parameters){
+				local.register(p);
+			}
+			return this.body.collect(local);
+		} else {
+			return false;
+		}
 	}
+	
 	
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.instruction.Instruction#resolve(fr.n7.stl.block.ast.scope.Scope)
 	 */
 	@Override
 	public boolean fullResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics resolve is undefined in FunctionDeclaration.");
+		boolean bool = true;
+		for (ParameterDeclaration parameter : this.parameters) {
+			bool = bool && parameter.getType().resolve(_scope);
+		}
+		return this.body.resolve(this.local) && bool;
 	}
 
 	/* (non-Javadoc)
@@ -117,12 +144,19 @@ public class FunctionDeclaration implements Instruction, Declaration {
 	 */
 	@Override
 	public boolean checkType() {
-		throw new SemanticsUndefinedException( "Semantics checkType is undefined in FunctionDeclaration.");
+		System.out.println("FunctDecl: checkType");
+		System.out.println(body.getReturnType());
+		System.out.println(this.type);
+		if (body.getReturnType() != this.type) {
+			return false;
+		}
+		Boolean bool = this.body.checkType();
+		return bool;
 	}
 
 	@Override
 	public Type getReturnType() {
-		return AtomicType.ErrorType;
+		return AtomicType.VoidType;
 	}
 
 	/* (non-Javadoc)

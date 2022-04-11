@@ -1,4 +1,12 @@
 test {
-	int tab[] = new int[5];
-	tab[4] = 3;
+
+ 	int test( boolean bool )
+	{
+		if (bool) {
+			return 3;
+		} else {
+			return false;
+		}
+	}
+	int dsbndkjbv = test(true);
 }

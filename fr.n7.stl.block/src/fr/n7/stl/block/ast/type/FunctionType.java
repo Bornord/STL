@@ -29,12 +29,38 @@ public class FunctionType implements Type {
 		}
 	}
 
+	public Type getReturnType() {
+		return this.result;
+	}
+
+	public List<Type> getParametersType() {
+		return this.parameters;
+	}
+
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.Type#equalsTo(fr.n7.stl.block.ast.Type)
 	 */
 	@Override
 	public boolean equalsTo(Type _other) {
-		throw new SemanticsUndefinedException( "equalsTo is undefined in FunctionType.");
+		if (_other instanceof FunctionType) {
+			FunctionType _local = (FunctionType) _other;
+			if (this.result.equalsTo(_local.getReturnType())) {
+				if (this.parameters.size() == _local.getParametersType().size()) {
+					for (int i =0; i < this.parameters.size(); i++) {
+						if (!(this.parameters.get(i).equalsTo(_local.getParametersType().get(i)))) {
+							return false;
+						}
+					}
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}	
+		} else {
+			return false;
+		}
 	}
 
 	/* (non-Javadoc)
@@ -42,7 +68,25 @@ public class FunctionType implements Type {
 	 */
 	@Override
 	public boolean compatibleWith(Type _other) {
-		throw new SemanticsUndefinedException( "compatibleWith is undefined in FunctionType.");
+		if (_other instanceof FunctionType) {
+			FunctionType _local = (FunctionType) _other;
+			if (this.result.compatibleWith(_local.getReturnType())) {
+				if (this.parameters.size() == _local.getParametersType().size()) {
+					for (int i =0; i < this.parameters.size(); i++) {
+						if (!(this.parameters.get(i).compatibleWith(_local.getParametersType().get(i)))) {
+							return false;
+						}
+					}
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}	
+		} else {
+			return false;
+		}
 	}
 
 	/* (non-Javadoc)

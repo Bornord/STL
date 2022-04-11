@@ -101,15 +101,13 @@ public class Block {
 
 
 	public Type getReturnType() {
-		boolean ok = true;
+		Type returnType = AtomicType.VoidType;
 		for (Instruction instruction : instructions) {
-			ok = ok && instruction.getReturnType() == AtomicType.VoidType;
+			if (returnType.equalsTo(AtomicType.VoidType)){
+				returnType = instruction.getReturnType();
+			}
 		}
-		if (ok) {
-			return AtomicType.VoidType;
-		} else {
-			return AtomicType.ErrorType;
-		}
+		return returnType;
 	}
 
 
