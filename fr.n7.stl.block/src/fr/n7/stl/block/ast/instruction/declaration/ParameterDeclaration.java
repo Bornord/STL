@@ -5,6 +5,7 @@ package fr.n7.stl.block.ast.instruction.declaration;
 
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.type.Type;
+import fr.n7.stl.tam.ast.Register;
 
 /**
  * Abstract Syntax Tree node for a formal parameter in a function declaration.
@@ -71,4 +72,11 @@ public class ParameterDeclaration implements Declaration {
 		return this.offset;
 	}
 
+	/**
+	 * Provide the register of the formal parameter in the list of formal parameters for the function
+	 * @return Register of the formal parameter
+	 */
+	public Register getRegister() {
+		return Register.LB;
+	}
 }
