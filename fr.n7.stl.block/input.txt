@@ -1,8 +1,4 @@
 test {
-	int a = 3;
-	int b = 5;
-	if (a == 3) {
-	}
-	while (a!=b) {
-	}
+	typedef enum nat { ZERO, UN, DEUX } naturel;
+	naturel ele = naturel.UN;
 }

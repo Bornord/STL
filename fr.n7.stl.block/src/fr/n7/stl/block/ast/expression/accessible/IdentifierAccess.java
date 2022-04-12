@@ -71,9 +71,11 @@ public class IdentifierAccess extends AbstractIdentifier implements AccessibleEx
 		/* This is the full resolve part that complements the backward resolve. */
 		/* If the resolution has not been done by the backward resolve */
 		if  (this.expression == null) {
-			System.out.println(this.name);
+			System.out.println("IdAccess : ");
+			System.out.println(_scope);
 			if (((HierarchicalScope<Declaration>)_scope).knows(this.name)) {
 				Declaration _declaration = _scope.get(this.name);
+				System.out.println(_declaration.getClass());
 				/* This kind should have been handled by partial resolve. */
 				if (_declaration instanceof VariableDeclaration) {
 					throw new SemanticsUndefinedException( "Collect and partial resolve have probably not been implemented correctly. The identifier " + this.name + " should have not been resolved previously.");
@@ -89,7 +91,8 @@ public class IdentifierAccess extends AbstractIdentifier implements AccessibleEx
 							return true;
 						} else {
 							if (_declaration instanceof TypeDeclaration && ((TypeDeclaration) _declaration).getType() instanceof EnumerationType) {
-								// this.expression = new FieldAccess(((EnumerationType) _declaration),this.toString());
+								System.out.println(_declaration.getClass());
+								//this.expression = new VariableAccess((VariableDeclaration) _declaration);
 								return true;
 							} else {
 							System.out.println(this);
@@ -113,6 +116,8 @@ public class IdentifierAccess extends AbstractIdentifier implements AccessibleEx
 	 */
 	@Override
 	public Type getType() {
+		System.out.println("IdAcess : ");
+		System.out.println(this);
 		if (this.expression != null) {
 			return this.expression.getType();
 		} else {

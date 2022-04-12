@@ -106,7 +106,13 @@ public class EnumerationType implements Type, Declaration {
 	 */
 	@Override
 	public boolean resolve(HierarchicalScope<Declaration> _scope) {
+		// boolean ok = true;
+		// for (int i = 0; i< this.labels.size(); i++) {
+		// 	ok = ok && this.labels.;
+		// 	}
+		// return ok;
 		return true;
+
 	}
 
 	/* (non-Javadoc)
