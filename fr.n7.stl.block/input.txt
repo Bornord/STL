@@ -1,4 +1,9 @@
 test {
 	int a = 3;
-	print a;
+	int b = 5;
+	if (a == 3) {
+	}
+	while (a!=b) {
+		a = 6;
+	}
 }

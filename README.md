@@ -24,6 +24,12 @@ Fichier de configuration :
 
 > runtam fonctionne de sûr avec ./fichiersTest/FichiersTAMTests/exempleTD.tam
 
+## Lancer la MV TAMADRA
+
+MAC :
+
+> java -jar --module-path $HOME/Documents/Config/jfx/lib --add-modules javafx.controls,javafx.fxml itam.jar
+
 ## Comment lire :
 
 -   Les classes sont complétés dans fr.n7.stl.block/src/
