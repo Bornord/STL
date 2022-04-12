@@ -1,4 +1,8 @@
 test {
-	typedef enum nat { ZERO, UN, DEUX } naturel;
-	naturel ele = naturel.UN;
+	int i = 10;
+     int j = 5;
+     while (i < 100) {
+     	int j = i;
+     	i = i + 1;
+    }
 }
