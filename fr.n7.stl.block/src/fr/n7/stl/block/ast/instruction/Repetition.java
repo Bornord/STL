@@ -6,6 +6,7 @@ package fr.n7.stl.block.ast.instruction;
 import fr.n7.stl.block.ast.Block;
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.expression.Expression;
+import fr.n7.stl.block.ast.expression.accessible.AccessibleExpression;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.scope.Scope;
@@ -22,6 +23,7 @@ import fr.n7.stl.tam.ast.TAMFactory;
  */
 public class Repetition implements Instruction {
 
+	private static int nbIteration;
 	protected Expression condition;
 	protected Block body;
 
@@ -43,28 +45,37 @@ public class Repetition implements Instruction {
 	 */
 	@Override
 	public boolean collectAndBackwardResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics collect is undefined in Repetition.");
-	}
+		if (this.condition.collectAndBackwardResolve(_scope)) {
+			return this.body.collect(_scope);
+		} else {
+			return false;
+		}	}
 	
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.instruction.Instruction#resolve(fr.n7.stl.block.ast.scope.Scope)
 	 */
 	@Override
 	public boolean fullResolve(HierarchicalScope<Declaration> _scope) {
-          return true;
-     }
+		if (this.condition.fullResolve(_scope)) {
+			return this.body.resolve(_scope);
+		} else {
+			return false;
+		}	
+	}
 
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.Instruction#checkType()
 	 */
 	@Override
 	public boolean checkType() {
-		throw new SemanticsUndefinedException("Semantics checkType undefined in Repetition.");
+		Boolean conditionOk = this.condition.getType().compatibleWith(AtomicType.BooleanType);
+		Boolean blockOk = this.body.checkType();
+		return conditionOk && blockOk;
 	}
 
      @Override
      public Type getReturnType() {
-          return AtomicType.ErrorType;
+		return this.body.getReturnType();
      }
 
 	/* (non-Javadoc)
@@ -72,7 +83,8 @@ public class Repetition implements Instruction {
 	 */
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		throw new SemanticsUndefinedException("Semantics allocateMemory undefined in Repetition.");
+		this.body.allocateMemory(_register, _offset);
+		return 0;
 	}
 
 	/* (non-Javadoc)
@@ -80,7 +92,18 @@ public class Repetition implements Instruction {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics getCode undefined in Repetition.");
+		Fragment frag = _factory.createFragment();
+		int nb = Repetition.nbIteration++;
+		frag.append(this.condition.getCode(_factory));
+		if (this.condition instanceof AccessibleExpression) {
+			frag.add(_factory.createLoadI(this.condition.getType().length()));
+		}
+		frag.addPrefix("etiq_cond_tantque_" + nb);
+		frag.add(_factory.createJumpIf("fin_tantQue_" + nb, 0));
+		frag.append(this.body.getCode(_factory));
+		frag.add(_factory.createJump("etiq_cond_tantque_" + nb));
+		frag.addSuffix("fin_tantQue_" + nb);
+		return frag;
 	}
 
 }

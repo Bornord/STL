@@ -31,10 +31,15 @@ test {
 }
 ```
 
-### test sur l'accès aux attributs
+### test sur la récupération des attributs
 
 ```c
-
+test {
+	<int,boolean> t = <4,false>;
+	<int,<int,boolean>> c = <2,t>;
+	int k = fst c;
+	<int,boolean> coupl = snd c;
+}
 ```
 
 ## Test qui doivent échouer
@@ -44,6 +49,37 @@ test {
 ```c
 test {
 	<int,boolean> c = <2,3>;
+}
+```
+
+### Test sur la mauvaise récupération d'une champ
+
+```c
+test {
+	<int,boolean> t = <4,false>;
+	<int,<int,boolean>> c = <2,t>;
+	int k = snd c;
+}
+```
+
+### Test sur l'aspect non-mutable des champs
+
+```c
+test {
+	<int,boolean> t = <4,false>;
+	<int,<int,boolean>> c = <2,t>;
+	fst c = 4;
+}
+```
+
+### Test sur la mauvaise récupération d'une champ via l'accesseur
+
+```c
+test {
+	<int,boolean> t = <4,false>;
+	<int,<int,boolean>> c = <2,t>;
+	int k = fst c;
+	<int,int> coupl = snd c;
 }
 ```
 

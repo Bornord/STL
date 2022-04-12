@@ -22,7 +22,7 @@ import fr.n7.stl.tam.ast.TAMFactory;
  */
 public class Iteration implements Instruction {
 
-	private static int nbIteration;
+	public static int nbIteration;
 	protected Expression condition;
 	protected Block body;
 
