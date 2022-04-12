@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
+import fr.n7.stl.block.ast.expression.accessible.AccessibleExpression;
 import fr.n7.stl.block.ast.instruction.declaration.FunctionDeclaration;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
@@ -15,6 +16,7 @@ import fr.n7.stl.block.ast.type.AtomicType;
 import fr.n7.stl.block.ast.type.FunctionType;
 import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
+import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
 
 /**
@@ -124,7 +126,17 @@ public class FunctionCall implements Expression {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException( "Semantics getCode is undefined in FunctionCall.");
+		Fragment frag = _factory.createFragment();
+		for(Expression exp : this.arguments) {
+			frag.append(exp.getCode(_factory));
+			if (exp instanceof AccessibleExpression) {
+				frag.add(_factory.createLoadI(exp.getType().length()));
+			}
+		}
+		frag.add(_factory.createCall(this.name, Register.SB));
+		frag.addComment(this.toString() + " start");
+		frag.addSuffix(";" + this.toString() + " end");
+		return frag;
 	}
 
 }

@@ -129,4 +129,8 @@ public class FunctionType implements Type {
 		throw new SemanticsUndefinedException("Semantics resolve is undefined in FunctionType.");
 	}
 
+    public Type getResultType() {
+        return null;
+    }
+
 }

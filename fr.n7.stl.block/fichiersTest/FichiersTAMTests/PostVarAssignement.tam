@@ -4,7 +4,6 @@ STORE (1) 0[SB]
 PUSH 1
 LOADL 5
 STORE (1) 1[SB]
-;(a == 3)
 LOADA 0[SB]
 LOADI (1)
 LOADL 3
@@ -13,7 +12,6 @@ JUMPIF (0) elseBranch_0
 JUMP finIf_0
 elseBranch_0
 finIf_0
-;(a != b)
 etiq_cond_tantque_0
 LOADA 0[SB]
 LOADI (1)

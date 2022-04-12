@@ -4,6 +4,8 @@
 package fr.n7.stl.block.ast.expression;
 
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
+import fr.n7.stl.block.ast.expression.accessible.AccessibleExpression;
+import fr.n7.stl.block.ast.instruction.Conditional;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.type.AtomicType;
@@ -109,7 +111,27 @@ public class ConditionalExpression implements Expression {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException( "Semantics getCode is undefined in ConditionalExpression.");
+		Fragment frag = this.condition.getCode(_factory);
+		if (this.condition instanceof AccessibleExpression) {
+			frag.add(_factory.createLoadI(this.condition.getType().length()));
+		}
+		int nb = Conditional.nbConditionnel++;
+		frag.add(_factory.createJumpIf("elseBranch_" + nb, 0));
+		frag.append(this.thenExpression.getCode(_factory));
+		if (this.thenExpression instanceof AccessibleExpression) {
+			frag.add(_factory.createLoadI(this.thenExpression.getType().length()));
+		}
+		frag.add(_factory.createJump("finIf_" + nb));
+		frag.addSuffix("elseBranch_" + nb);
+		Fragment frag_else = _factory.createFragment();
+		frag_else.append(this.elseExpression.getCode(_factory));
+		if (this.elseExpression instanceof AccessibleExpression) {
+			frag.add(_factory.createLoadI(this.elseExpression.getType().length()));
+		}
+		frag.append(frag_else);
+		frag.addSuffix("finIf_" + nb);
+		frag.addComment(this.toString());
+		return frag;
 	}
 
 }

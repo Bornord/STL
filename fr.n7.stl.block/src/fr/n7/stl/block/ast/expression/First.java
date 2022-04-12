@@ -4,6 +4,7 @@
 package fr.n7.stl.block.ast.expression;
 
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
+import fr.n7.stl.block.ast.expression.accessible.AccessibleExpression;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.type.AtomicType;
@@ -72,7 +73,15 @@ public class First implements Expression {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics getCode undefined in First.");
+		Fragment frag = this.target.getCode(_factory);
+		if (this.target instanceof AccessibleExpression) {
+			frag.add(_factory.createLoadI(((CoupleType)this.target.getType()).getFirst().length()));
+		} else {
+			frag.add(_factory.createPop(0, ((CoupleType)this.target.getType()).getSecond().length()));
+		}
+		frag.addComment(this.toString() + " start");
+		frag.addSuffix(";" + this.toString() + " end");
+		return frag;
 	}
 
 }

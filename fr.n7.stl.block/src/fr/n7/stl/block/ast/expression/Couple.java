@@ -4,6 +4,7 @@
 package fr.n7.stl.block.ast.expression;
 
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
+import fr.n7.stl.block.ast.expression.accessible.AccessibleExpression;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.type.CoupleType;
@@ -79,7 +80,17 @@ public class Couple implements Expression {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException( "Semantics getCode is undefined in Couple.");
+		Fragment frag = this.first.getCode(_factory);
+		if (this.first instanceof AccessibleExpression) {
+			frag.add(_factory.createLoadI(this.first.getType().length()));
+		}
+		frag.append(this.second.getCode(_factory));
+		if (this.second instanceof AccessibleExpression) {
+			frag.add(_factory.createLoadI(this.second.getType().length()));
+		}
+		frag.addComment(this.toString() + " start");
+		frag.addSuffix(";" + this.toString() + " end");
+		return frag;
 	}
 
 }
