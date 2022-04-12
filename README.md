@@ -12,7 +12,9 @@ Projet de STL
 
 ## Lancer le code sur MV TAM :
 
-> java -jar runtam.jar fichiersTest/FichiersTAMTests/{fichier}.tam
+> java -jar runtam.jar ./fichiersTest/FichiersTAMTests/{fichier}.tam sur MAC
+> java -jar runtam.jar .\fichiersTest\FichiersTAMTests\{fichier}.tam sur windows
+> runtam fonctionne de sûr avec ./fichiersTest/FichiersTAMTests/exempleTD.tam
 
 ## Comment lire :
 
