@@ -1,4 +1,10 @@
 test {
-	typedef enum nat { ZERO, UN, DEUX } naturel;
-	naturel ele = naturel.UN;
+	boolean bool = false;
+	int k = 4;
+	while (bool) {
+		k = k + 3;
+		if (k < 20) {
+			bool = true;
+		}
+	}
 }
