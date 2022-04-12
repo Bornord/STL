@@ -4,11 +4,15 @@ Projet de STL
 
 ## Compiler :
 
-    ant
+> ant
 
 ## Exécuter le fichier input.txt :
 
-java -cp bin:tools/java-cup-11b-runtime.jar:tools/commons-lang3-3.7.jar:tools/commons-text-1.2.jar fr.n7.stl.block.Driver
+> java -cp bin:tools/java-cup-11b-runtime.jar:tools/commons-lang3-3.7.jar:tools/commons-text-1.2.jar fr.n7.stl.block.Driver
+
+## Lancer le code sur MV TAM :
+
+> java -jar runtam.jar fichiersTest/FichiersTAMTests/{fichier}.tam
 
 ## Comment lire :
 
