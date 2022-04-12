@@ -1,5 +1,4 @@
 test {
-	boolean premier (int n) {
-        return true;
-    }
+	int a = 3;
+	print a;
 }

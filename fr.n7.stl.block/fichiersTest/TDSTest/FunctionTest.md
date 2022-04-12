@@ -13,24 +13,8 @@
 ```c
 test {
 	boolean premier (int n) {
-        for (int i=2; i < n/2; i++) {
-            if (n%i != 0) {
-                return false;
-            }
-        }
         return true;
     }
-}
-```
-
-### Test sur une fonction sans return
-
-```c
-test {
-    void afficher (String message) {
-        printf(message);
-    }
-    afficher();
 }
 ```
 
@@ -62,6 +46,34 @@ test {
 }
 ```
 
+### Test sur une fonction qui renvoie un résultat de façon conditionnnelle
+
+```C
+test {
+	int vrai() {
+        int i = 3;
+        int j = 4;
+        int k = 5;
+        boolean bool = false;
+        if (k >0) {
+            return i;
+        } else {
+            return j;
+        }
+    }
+}
+```
+
+### Test sur une fonction qui n'a pas de return
+
+```c
+test {
+	void double(int n) {
+        int res = 2*n;
+    }
+}
+```
+
 ## Test qui doivent échouer
 
 ### Test sur une fonction qui n'a pas de return
@@ -74,19 +86,7 @@ test {
 }
 ```
 
-### Test sur une fonction qui peut ne rien retourner
-
-```c
-test {
-	boolean pair(int n) {
-        if (n%2 == 0) {
-            return true;
-        }
-    }
-}
-```
-
-### Test sur la surcharge
+### Test sur la surcharge : le collect doit échouer
 
 ```c
 test {
@@ -113,13 +113,78 @@ test {
 }
 ```
 
-### Test sur une fonction de type Void, qui renvoie un résultat
+### Tests sur une erreur du nombre d'arguments
 
-```C
+```c
 test {
-	void vrai() {
+	boolean testParam(int n, float r, boolean b) {
         return true;
     }
 
+    boolean b = testParam(2, 3.0);
+
+}
+```
+
+### Test sur une fonction de type int, qui renvoie un type de façon conditionnelle
+
+```C
+test {
+	int vrai() {
+        int i = 3;
+        int j = 4;
+        int k = 5;
+        boolean bool = false;
+        if (k >0) {
+            return i;
+        } else {
+            return bool;
+        }
+    }
+}
+```
+
+### Test sur une fonction de type int, qui renvoie de façon alternative un type
+
+```C
+test {
+	int vrai() {
+        int i = 3;
+        int j = 4;
+        int k = 5;
+        boolean bool = false;
+        if (k >0) {
+            return i;
+        } else {
+            int j = 3;
+        }
+    }
+}
+```
+
+## Problèmes qui doivent
+
+### Test sur une fonction sans return
+
+// TODO : pas implémenté
+
+```c
+test {
+    void afficher (String message) {
+        print(message);
+    }
+    afficher();
+}
+```
+
+### Test sur une fonction qui peut ne rien retourner
+
+```c
+test {
+	boolean pair(int n) {
+        if (n%2 == 0) {
+            return true;
+        }
+    }
 }
 ```
