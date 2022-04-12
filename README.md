@@ -12,8 +12,16 @@ Projet de STL
 
 ## Lancer le code sur MV TAM :
 
-> java -jar runtam.jar ./fichiersTest/FichiersTAMTests/{fichier}.tam sur MAC
-> java -jar runtam.jar .\fichiersTest\FichiersTAMTests\{fichier}.tam sur windows
+UNIX :
+
+> java -jar runtam.jar ./fichiersTest/FichiersTAMTests/{fichier}.tam
+
+WINDOWS :
+
+> java -jar runtam.jar .\fichiersTest\FichiersTAMTests\{fichier}.tam
+
+Fichier de configuration :
+
 > runtam fonctionne de sûr avec ./fichiersTest/FichiersTAMTests/exempleTD.tam
 
 ## Comment lire :

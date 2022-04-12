@@ -1,8 +1,5 @@
 test {
-	int i = 10;
-     int j = 5;
-     while (i < 100) {
-     	int j = i;
-     	i = i + 1;
+	boolean premier (int n) {
+        return true;
     }
 }
