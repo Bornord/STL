@@ -5,7 +5,7 @@ PUSH 1
 LOADL 5
 STORE (1) 1[SB]
 ;(a == 3)
-LOADA 0[SB]
+LOAD (1) 0[SB]
 LOADI (1)
 LOADL 3
 SUBR IEq
@@ -15,11 +15,12 @@ elseBranch_0
 finIf_0
 ;(a != b)
 etiq_cond_tantque_0
-LOADA 0[SB]
+LOAD (1) 0[SB]
 LOADI (1)
-LOADA 1[SB]
+LOAD (1) 1[SB]
 LOADI (1)
 SUBR INeq
 JUMPIF (0) fin_tantQue_0
 JUMP etiq_cond_tantque_0
 fin_tantQue_0
+HALT

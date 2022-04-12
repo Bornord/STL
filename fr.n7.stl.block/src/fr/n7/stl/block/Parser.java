@@ -763,7 +763,7 @@ class CUP$Parser$actions {
 							TAMFactoryImpl factory = new TAMFactoryImpl();
 							bloc.allocateMemory(Register.SB,0);
 							Fragment fragment = bloc.getCode(factory);
-							System.out.println("fragments : " + fragment);
+							System.out.println("fragments : " + fragment + "\n"+ "HALT\n");
 						} else {
 							System.out.println("Type check failed");
 						}
