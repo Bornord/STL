@@ -1,6 +1,8 @@
 # Fichier de tests sur les whiles
 
 -   Tests implémentés :
+    -   Robutesse du typage (condition & body)
+    -   Affectation et changement dans un while
 
 ## Tests qui doivent marcher
 
@@ -63,6 +65,22 @@ test {
 	boolean bool = true;
 	int k = 4;
 	while () {
+	}
+}
+```
+
+### test sur un mauvais typage au sein d'un while vides
+
+```c
+test {
+	boolean bool = false;
+	int k = 4;
+	while (bool) {
+		k = k + 3;
+		if (k < 20) {
+			bool = true;
+		}
+		int bool = true;
 	}
 }
 ```

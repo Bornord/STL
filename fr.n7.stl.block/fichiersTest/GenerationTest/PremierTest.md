@@ -15,6 +15,8 @@ test {
 }
 ```
 
+### Test génération TAM, puis VM.
+
 ## Test qui doivent échouer
 
 ### Tests pour vérifier que le typage fonctionne sur les pointeurs
