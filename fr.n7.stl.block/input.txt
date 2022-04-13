@@ -1,9 +1,4 @@
 test {
-	int a = 3;
-	int b = 5;
-	if (a == 3) {
-	}
-	while (a!=b) {
-		a = 6;
-	}
+	<int,boolean> t = <4,false>;
+	<int,<int,boolean>> c = <2,t>;
 }
