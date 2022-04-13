@@ -1,0 +1,23 @@
+PUSH 2
+;new Point[ 2 ] start
+LOADL 2
+LOADL 2
+SUBR IMul
+SUBR MAlloc
+;new Point[ 2 ] end
+STORE (2) 0[SB]
+PUSH 2
+;{ 4 ,5 } start
+LOADL 4
+LOADL 5
+;{ 4 ,5 } end
+STORE (2) 2[SB]
+LOADA 2[SB]
+LOADI (2)
+; arrP [ 0 ] start
+LOADA 0[SB]
+LOADL 0
+SUBR IAdd
+; arrP [ 0 ] end
+STOREI (2)
+HALT
