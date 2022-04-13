@@ -94,6 +94,7 @@ public class Block {
 	public boolean checkType() {
 		boolean ok = true;
 		for (Instruction instruction : instructions) {
+			System.out.println("Block : checktype" + instruction.getClass());
 			ok = ok && instruction.checkType();
 		} 
 		return ok;

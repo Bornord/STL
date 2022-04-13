@@ -1,52 +1,5 @@
-testAssignement {
-	typedef struct structPoint{
-		int x;
-		int y;
-		int z;
-	} Point;
+test {
 	
-	typedef <Point, Point> Segment;
-	
-	typedef enum enumCouleur{ORANGE, BLEU, VERT} Couleur ;
-
-	typedef struct structPlan {
-		Segment s1;
-		Segment s2;
-	} Plan;
-	
-	typedef Point SuperPoint;
-	
-	Point p1 = {1, 2, 3};
-	 
-	Point p2 = {4, 5, 6};
-	
-	Segment s1 = <p1, p2>;
-
-	Segment s2 = <{1, 2, 3}, {9, 8, 0}>;
-	
-	Plan plan1 = {s1, s2};
-	
-	//Couleur c = Couleur.ORANGE;
-	
-	SuperPoint p3 = p1;
-	
-	SuperPoint p4 = {3, 3, 3};
-	
-	int x = 4;
-	
-	int array1[] = new int[3];
-	
-	//int array2[] = {1, 2, 3};
-
-	p1.x = x;
-	
-	int y = 3;
-	
-	p2.y = 8;
-	
-	p3.z = 8;
-	
-	//p4.z = array2[1];	
-	
-	plan1.s1 = <{2, 2, 2}, {2, 2, 2}>;
+	int tab[] = new int[5];
+	tab[4] = 5;
 }
