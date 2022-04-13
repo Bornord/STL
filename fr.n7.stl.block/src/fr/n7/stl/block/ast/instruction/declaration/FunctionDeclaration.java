@@ -184,4 +184,20 @@ public class FunctionDeclaration implements Instruction, Declaration {
 		return frag;
 	}
 
+		/**
+	 * Provide the offset of the formal parameter in the list of formal parameters for the function
+	 * @return Offset of the formal parameter
+	 */
+	public int getOffset() {
+		return 0;
+	}
+
+	/**
+	 * Provide the register of the formal parameter in the list of formal parameters for the function
+	 * @return Register of the formal parameter
+	 */
+	public Register getRegister() {
+		return null;
+	}
+
 }

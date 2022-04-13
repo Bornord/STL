@@ -21,4 +21,8 @@ public interface Declaration {
 	 */
 	public Type getType();
 
+	public Register getRegister();
+
+	public int getOffset();
+
 }

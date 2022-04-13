@@ -36,6 +36,8 @@ public class ConstantDeclaration implements Instruction, Declaration {
 	 */
 	protected Expression value;
 
+
+
 	/**
 	 * Builds an AST node for a constant declaration
 	 * @param _name : Name of the constant
@@ -128,5 +130,22 @@ public class ConstantDeclaration implements Instruction, Declaration {
 	public Fragment getCode(TAMFactory _factory) {
 		return null;
 	}
+
+		/**
+	 * Provide the offset of the formal parameter in the list of formal parameters for the function
+	 * @return Offset of the formal parameter
+	 */
+	public int getOffset() {
+		return 0;
+	}
+
+	/**
+	 * Provide the register of the formal parameter in the list of formal parameters for the function
+	 * @return Register of the formal parameter
+	 */
+	public Register getRegister() {
+		return null;
+	}
+}
 
 }
