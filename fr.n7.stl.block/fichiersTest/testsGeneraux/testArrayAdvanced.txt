@@ -1,0 +1,21 @@
+test{
+	typedef struct structPoint{
+		int x;
+		int y;
+	} Point;
+	
+	typedef struct s{
+		Point a[];
+		<character, int> c;
+	} Type1;
+	
+	Point arrP[] = new Point[2];
+	
+	arrP[0] = {4, 5};
+
+	Type1 t = {arrP, <'e', 5>};
+	
+	print t.a[0].x;
+	
+	print fst t.c;
+}

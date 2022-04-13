@@ -1,0 +1,8 @@
+testRecord {
+	typedef struct p{ 
+		int x;
+		int y;
+	} Point ;
+	int i = 1;
+	Point p = {1,i};
+}

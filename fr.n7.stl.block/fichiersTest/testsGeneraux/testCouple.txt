@@ -1,0 +1,5 @@
+test{
+	<int, character> c = <2, 'a'>;
+	print fst c;
+	print snd c;
+}

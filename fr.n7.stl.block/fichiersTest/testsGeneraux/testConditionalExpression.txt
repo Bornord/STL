@@ -1,0 +1,5 @@
+test{
+	int i = 5;
+	int x = i>0? 3:2;
+	print x;
+}

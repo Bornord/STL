@@ -1,0 +1,13 @@
+test{
+
+	
+	typedef enum enumC {R, G, B,J} Couleur;
+	Couleur c1 = Couleur.R;	
+	//c1 = NAT.G;
+	Couleur n2 = B;
+	n2 = G;
+	n2 = Couleur.J;
+	int i = 2;
+	print n2;
+	//print Couleur.B;
+}

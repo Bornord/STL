@@ -1,0 +1,19 @@
+testhardcore{
+	typedef struct structPoint{
+		int x;
+		int y;
+	} Point;
+	
+	int f(<int, Point> p ){
+		if((snd p).x > 0){
+			return fst p;
+		} 
+		return fst p > 0 ? 1 : -1;	
+	}
+	
+	//<int,Point> p = <3, {56, 1}>;
+	//print (snd p).x > 0;
+	//print fst p > 0 ;
+
+	print f(<3, {0, 1}>);
+}

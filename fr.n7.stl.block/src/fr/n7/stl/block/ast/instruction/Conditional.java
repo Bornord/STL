@@ -23,7 +23,7 @@ import fr.n7.stl.tam.ast.TAMFactory;
  */
 public class Conditional implements Instruction {
 
-	private static int nbConditionnel;
+	public static int nbConditionnel;
 	protected Expression condition;
 	protected Block thenBranch;
 	protected Block elseBranch;
