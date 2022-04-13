@@ -1,0 +1,10 @@
+testConditional {
+	int i = 1;
+	i = 6; 
+	const int j = 2;
+	if(i < 5){
+		i = 3;
+	}else{
+		i = 10;
+	}
+}

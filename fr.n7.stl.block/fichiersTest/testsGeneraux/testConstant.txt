@@ -1,0 +1,17 @@
+testConstant {
+	const int j = 65;
+	print j;
+	//j = 2;
+	int f (int x){
+		x =2;
+		return x;
+	}
+	int i = 6;
+	print f(i);
+	print i;
+	print f(j);
+	print j;
+	
+
+	
+}

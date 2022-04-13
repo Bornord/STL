@@ -1,0 +1,17 @@
+test{
+	boolean b = (boolean) 5;
+	print b;
+	//true
+	
+	character c = (character) 99;
+	print c;
+	//'c'
+	
+	int i = (int) false;
+	print i;
+	//0
+	
+	int o = (int) 'e';
+	print o;
+	//101
+}

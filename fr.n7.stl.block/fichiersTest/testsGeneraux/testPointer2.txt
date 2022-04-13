@@ -1,0 +1,7 @@
+test{
+	int a = 45;
+	int * b = &a;
+	*b = 4;
+	int c = *b;
+	print c;
+}

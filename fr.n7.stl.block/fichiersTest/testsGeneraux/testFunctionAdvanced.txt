@@ -1,0 +1,45 @@
+fact {
+	/*int fact( int n ) {
+     if ( n == 0 ) {
+       return 1;
+     } else {
+       return n * (fact (n - 1));
+     }
+   }
+   print fact( 5 );*/
+   
+   /*	typedef struct structPoint{
+		int x;
+		int y;
+	} Point;
+	
+	Point translate(Point p, int x , int y){
+		return {p.x + x,p.y + y};
+	}
+	Point o = {0,56};
+	int v = 8;
+	print translate(o,v,2).x;
+
+	int f(int x){
+		print x;
+		return 1;
+	}
+	int a = f(v);
+	a = f(7);
+	print a;
+
+	void g(){
+		print 1;
+	}
+	print g();
+	
+	int b = 5;
+	print b;*/
+	
+	typedef <int,int> Pair;
+	Pair h(int x,int y){
+		return <x,y>;
+	}
+	print snd (h(4,7));
+	
+ }

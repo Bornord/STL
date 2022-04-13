@@ -1,0 +1,9 @@
+test{
+	
+	int arr[] = new int[3];
+	
+	arr[0] = 3;
+	
+	print arr[0];
+	
+}
