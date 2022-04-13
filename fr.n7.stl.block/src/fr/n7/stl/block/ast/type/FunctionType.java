@@ -102,7 +102,11 @@ public class FunctionType implements Type {
 	 */
 	@Override
 	public int length() {
-		throw new SemanticsUndefinedException("Semantics length is undefined in FunctionType.");
+		int paramL = 0;
+		for (Type type: this.parameters) {
+			paramL += type.length();
+		}
+		return (result.length() + paramL);
 	}
 
 	/* (non-Javadoc)
