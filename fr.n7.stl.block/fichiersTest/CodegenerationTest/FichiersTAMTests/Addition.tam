@@ -1,0 +1,38 @@
+;fr.n7.stl.block.ast.expression.accessible.ParameterAccess@66133adc start
+;(a + b)
+add
+LOADA -2[LB]
+;fr.n7.stl.block.ast.expression.accessible.ParameterAccess@66133adc end
+LOADI (1)
+;fr.n7.stl.block.ast.expression.accessible.ParameterAccess@7bfcd12c start
+LOADA -1[LB]
+;fr.n7.stl.block.ast.expression.accessible.ParameterAccess@7bfcd12c end
+LOADI (1)
+SUBR IAdd
+LOADA -2[LB]
+STOREI (1)
+RETURN (0) 2
+PUSH 1
+LOADL 3
+STORE (1) 0[SB]
+PUSH 1
+LOADL 8
+STORE (1) 1[SB]
+;void add( int a ,int b ){
+ a  = (a + b);
+}
+( a ,b) start
+LOADA 0[SB]
+LOADI (1)
+LOADA 1[SB]
+LOADI (1)
+CALL (SB) add
+;void add( int a ,int b ){
+ a  = (a + b);
+}
+( a ,b) end
+SUBR SOut
+LOADA 0[SB]
+LOADI (1)
+SUBR IOut
+HALT

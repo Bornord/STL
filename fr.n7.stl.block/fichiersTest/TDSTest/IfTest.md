@@ -6,6 +6,8 @@
     -   aspect local des définitions des sous-blocs
     -   typage des conditions
 
+La génération de code associée à chaque programme a été copiée depuis notre terminal à la suite du code C.
+
 ## Tests qui doivent marcher
 
 ### Test sur l'affectation multiples & redéfinitions locales

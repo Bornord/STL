@@ -1,0 +1,25 @@
+PUSH 1
+;new int[ 3 ] start
+LOADL 3
+LOADL 1
+SUBR IMul
+SUBR MAlloc
+;new int[ 3 ] end
+STORE (1) 0[SB]
+LOADL 3
+; arr [ 0 ] start
+LOADA 0[SB]
+LOADL 0
+SUBR IAdd
+; arr [ 0 ] end
+;arr[ 0 ] end
+STOREI (1)
+;arr[ 0 ] start
+LOADL 0
+LOADA 0[SB]
+SUBR IAdd
+; arr [ 0 ] end
+;arr[ 0 ] end
+LOADI (1)
+SUBR IOut
+HALT

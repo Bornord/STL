@@ -6,6 +6,10 @@
     -   aspect local des définitions des sous-blocs
     -   surcharge
 
+La génération de code associée à chaque programme a été copiée depuis notre terminal à la suite du code C.
+Dans ce cas, comme la génération de code du return n'est pas effective, les champs de tests sont moindre en terme de génération de code.
+De ce fait, le code TAM est souvent absent dans ce fichier précis.
+
 ## Tests qui doivent marcher
 
 ### Test sur une fonction avec plusieurs return
@@ -72,6 +76,21 @@ test {
         int res = 2*n;
     }
 }
+```
+
+```TAM
+double
+PUSH 1
+;(2 * n)
+LOADL 2
+;fr.n7.stl.block.ast.expression.accessible.ParameterAccess@768debd start
+LOADA -1[LB]
+;fr.n7.stl.block.ast.expression.accessible.ParameterAccess@768debd end
+LOADI (1)
+SUBR IMul
+STORE (1) 3[LB]
+RETURN (0) 1
+HALT
 ```
 
 ## Test qui doivent échouer

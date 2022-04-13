@@ -1,0 +1,17 @@
+PUSH 2
+;< 2, 'a'> start
+LOADL 2
+LOADL 97
+;< 2, 'a'> end
+STORE (2) 0[SB]
+;(fstc) start
+LOADA 0[SB]
+LOADI (1)
+;(fstc) end
+SUBR IOut
+;(sndc) start
+LOADA 0[SB]
+LOADI (1)
+;(sndc) end
+SUBR COut
+HALT

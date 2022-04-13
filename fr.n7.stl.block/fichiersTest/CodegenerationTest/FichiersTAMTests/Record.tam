@@ -1,0 +1,11 @@
+PUSH 1
+LOADL 1
+STORE (1) 0[SB]
+PUSH 2
+;{ 1 ,i } start
+LOADL 1
+LOADA 0[SB]
+LOADI (1)
+;{ 1 ,i } end
+STORE (2) 1[SB]
+HALT

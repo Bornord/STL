@@ -4,6 +4,8 @@
     -   Robutesse du typage (condition & body)
     -   Affectation et changement dans un while
 
+La génération de code associée à chaque programme a été copiée depuis notre terminal à la suite du code C.
+
 ## Tests qui doivent marcher
 
 ### Test sur le typage où la condition n'est pas un booléen explicitement
@@ -18,6 +20,32 @@ test {
 }
 ```
 
+```TAM
+PUSH 1
+LOADL 1
+STORE (1) 0[SB]
+PUSH 1
+LOADL 4
+STORE (1) 1[SB]
+;(k < 10)
+etiq_cond_tantque_0
+LOADA 1[SB]
+LOADI (1)
+LOADL 10
+SUBR ILss
+JUMPIF (0) fin_tantQue_0
+;(k + 3)
+LOADA 1[SB]
+LOADI (1)
+LOADL 3
+SUBR IAdd
+LOADA 1[SB]
+STOREI (1)
+JUMP etiq_cond_tantque_0
+fin_tantQue_0
+HALT
+```
+
 ### Test sur un while vide
 
 ```c
@@ -27,6 +55,25 @@ test {
 	while (k < 10) {
 	}
 }
+```
+
+```TAM
+PUSH 1
+LOADL 1
+STORE (1) 0[SB]
+PUSH 1
+LOADL 4
+STORE (1) 1[SB]
+;(k < 10)
+etiq_cond_tantque_0
+LOADA 1[SB]
+LOADI (1)
+LOADL 10
+SUBR ILss
+JUMPIF (0) fin_tantQue_0
+JUMP etiq_cond_tantque_0
+fin_tantQue_0
+HALT
 ```
 
 ### test un peu plus complexe avec manipulation de conditions
@@ -44,6 +91,41 @@ test {
 }
 ```
 
+```TAM
+PUSH 1
+LOADL 1
+STORE (1) 0[SB]
+PUSH 1
+LOADL 4
+STORE (1) 1[SB]
+etiq_cond_tantque_0
+LOADA 0[SB]
+LOADI (1)
+JUMPIF (0) fin_tantQue_0
+;(k + 3)
+LOADA 1[SB]
+LOADI (1)
+LOADL 3
+SUBR IAdd
+LOADA 1[SB]
+STOREI (1)
+;(k < 20)
+LOADA 1[SB]
+LOADI (1)
+LOADL 20
+SUBR ILss
+JUMPIF (0) elseBranch_0
+LOADL 0
+LOADA 0[SB]
+STOREI (1)
+JUMP finIf_0
+elseBranch_0
+finIf_0
+JUMP etiq_cond_tantque_0
+fin_tantQue_0
+HALT
+```
+
 ### Test sur la redéfinition locale
 
 ```c
@@ -55,6 +137,35 @@ test {
      	i = i + 1;
     }
 }
+```
+
+```TAM
+PUSH 1
+LOADL 10
+STORE (1) 0[SB]
+PUSH 1
+LOADL 5
+STORE (1) 1[SB]
+;(i < 100)
+etiq_cond_tantque_0
+LOADA 0[SB]
+LOADI (1)
+LOADL 100
+SUBR ILss
+JUMPIF (0) fin_tantQue_0
+PUSH 1
+LOADA 0[SB]
+STORE (1) 2[SB]
+;(i + 1)
+LOADA 0[SB]
+LOADI (1)
+LOADL 1
+SUBR IAdd
+LOADA 0[SB]
+STOREI (1)
+JUMP etiq_cond_tantque_0
+fin_tantQue_0
+HALT
 ```
 
 ## Test qui doivent échouer
