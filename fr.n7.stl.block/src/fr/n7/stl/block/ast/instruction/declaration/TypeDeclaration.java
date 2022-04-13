@@ -126,6 +126,5 @@ public class TypeDeclaration implements Declaration, Instruction {
 	public Register getRegister() {
 		return null;
 	}
-}
 
 }

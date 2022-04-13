@@ -146,6 +146,5 @@ public class ConstantDeclaration implements Instruction, Declaration {
 	public Register getRegister() {
 		return null;
 	}
-}
 
 }

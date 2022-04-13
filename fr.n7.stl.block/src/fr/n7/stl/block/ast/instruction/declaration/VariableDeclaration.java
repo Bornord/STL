@@ -171,5 +171,4 @@ public class VariableDeclaration implements Declaration, Instruction {
 		fragment.add(_factory.createStore(register, offset, size));
 		return fragment;
 	}
-
 }
